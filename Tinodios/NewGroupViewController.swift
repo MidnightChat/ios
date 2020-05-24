@@ -1,12 +1,12 @@
 //
 //  NewGroupViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 protocol NewGroupDisplayLogic: class {
     func presentChat(with topicName: String)
@@ -41,8 +41,8 @@ class NewGroupViewController: UITableViewController {
         }
 
         // Add me to selectedUids and selectedContacts.
-        let tinode = Cache.getTinode()
-        if let myUid = tinode.myUid {
+        let midnight = Cache.getMidnight()
+        if let myUid = midnight.myUid {
             selectedContacts = ContactsManager.default.fetchContacts(withUids: [myUid]) ?? []
             if !selectedContacts.isEmpty {
                 selectedUids.insert(myUid)
@@ -137,8 +137,8 @@ class NewGroupViewController: UITableViewController {
 
     @IBAction func saveButtonClicked(_ sender: Any) {
         let groupName = UiUtils.ensureDataInTextField(groupNameTextField, maxLength: UiUtils.kMaxTitleLength)
-        let tinode = Cache.getTinode()
-        let members = selectedMembers.filter { !tinode.isMe(uid: $0) }
+        let midnight = Cache.getMidnight()
+        let members = selectedMembers.filter { !midnight.isMe(uid: $0) }
         if members.isEmpty {
             UiUtils.showToast(message: NSLocalizedString("Select at least one group member", comment: "Error message"))
             return
@@ -168,10 +168,10 @@ class NewGroupViewController: UITableViewController {
     }
 
     private func createGroupTopic(titled name: String, subtitled subtitle: String, with tags: [String]?, consistingOf members: [String], withAvatar avatar: UIImage?) {
-        let tinode = Cache.getTinode()
-        let topic = DefaultComTopic(in: tinode, forwardingEventsTo: nil)
+        let midnight = Cache.getMidnight()
+        let topic = DefaultComTopic(in: midnight, forwardingEventsTo: nil)
         topic.pub = VCard(fn: name, avatar: avatar)
-        topic.priv = ["comment": .string(subtitle)] // No need to use Tinode.kNullValue here
+        topic.priv = ["comment": .string(subtitle)] // No need to use Midnight.kNullValue here
         topic.tags = tags
         topic.subscribe().then(
             onSuccess: { msg in
@@ -225,7 +225,7 @@ extension NewGroupViewController: EditMembersDelegate {
     }
 
     func editMembersWillChangeState(_: UIView, uid: String, added: Bool, initiallySelected: Bool) -> Bool {
-        return !Cache.getTinode().isMe(uid: uid)
+        return !Cache.getMidnight().isMe(uid: uid)
     }
 }
 

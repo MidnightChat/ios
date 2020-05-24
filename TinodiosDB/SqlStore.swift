@@ -2,11 +2,11 @@
 //  SqlStore.swift
 //  msgr
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
+import MidnightSDK
 
 enum SqlStoreError: Error {
     case dbError(String)
@@ -51,22 +51,22 @@ public class SqlStore : Storage {
     var timeAdjustment: TimeInterval = TimeInterval(0)
     public var isReady: Bool { get { return self.dbh?.isReady ?? false }}
 
-    public func topicGetAll(from tinode: Tinode?) -> [TopicProto]? {
+    public func topicGetAll(from midnight: Midnight?) -> [TopicProto]? {
         guard let tdb = self.dbh?.topicDb, let rows = tdb.query() else {
             return nil
         }
         var results: [TopicProto] = []
         for r in rows {
-            if let t = tdb.readOne(for: tinode, row: r) {
+            if let t = tdb.readOne(for: midnight, row: r) {
                 results.append(t)
             }
         }
         return results
     }
 
-    public func topicGet(from tinode: Tinode?, withName name: String?) -> TopicProto? {
+    public func topicGet(from midnight: Midnight?, withName name: String?) -> TopicProto? {
         guard let tdb = self.dbh?.topicDb else { return nil }
-        return tdb.readOne(for: tinode, withName: name)
+        return tdb.readOne(for: midnight, withName: name)
     }
 
     public func topicAdd(topic: TopicProto) -> Int64 {

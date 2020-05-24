@@ -1,24 +1,24 @@
 //
 //  ComTopic.swift
-//  TinodeSDK
+//  MidnightSDK
 //
-//  Copyright © 2020 Tinode. All rights reserved.
+//  Copyright © 2020 Midnight. All rights reserved.
 //
 
 import Foundation
 
 public class ComTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateType> {
-    override init(tinode: Tinode?, name: String, l: Listener?) {
-        super.init(tinode: tinode, name: name, l: l)
+    override init(midnight: Midnight?, name: String, l: Listener?) {
+        super.init(midnight: midnight, name: name, l: l)
     }
-    override init(tinode: Tinode?, sub: Subscription<DP, PrivateType>) {
-        super.init(tinode: tinode, sub: sub)
+    override init(midnight: Midnight?, sub: Subscription<DP, PrivateType>) {
+        super.init(midnight: midnight, sub: sub)
     }
-    override init(tinode: Tinode?, name: String, desc: Description<DP, PrivateType>) {
-        super.init(tinode: tinode, name: name, desc: desc)
+    override init(midnight: Midnight?, name: String, desc: Description<DP, PrivateType>) {
+        super.init(midnight: midnight, name: name, desc: desc)
     }
-    public convenience init(in tinode: Tinode?, forwardingEventsTo l: Listener? = nil) {
-        self.init(tinode: tinode!, name: Tinode.kTopicNew + tinode!.nextUniqueString(), l: l)
+    public convenience init(in midnight: Midnight?, forwardingEventsTo l: Listener? = nil) {
+        self.init(midnight: midnight!, name: Midnight.kTopicNew + midnight!.nextUniqueString(), l: l)
     }
 
     public override var isArchived: Bool {
@@ -43,7 +43,7 @@ public class ComTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, Priva
     override public func getSubscription(for key: String?) -> Subscription<DP, PrivateType>? {
         guard let sub = super.getSubscription(for: key) else { return nil }
         if isP2PType && sub.pub == nil {
-            sub.pub = self.name == key ? self.pub : tinode?.getMeTopic()?.pub as? DP
+            sub.pub = self.name == key ? self.pub : midnight?.getMeTopic()?.pub as? DP
         }
         return sub
     }

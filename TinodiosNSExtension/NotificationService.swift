@@ -1,13 +1,13 @@
 //
 //  NotificationService.swift
-//  TinodiosNSExtension
+//  MidnightiosNSExtension
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UserNotifications
-import TinodiosDB
-import TinodeSDK
+import MidnightiosDB
+import MidnightSDK
 
 @available(iOS 10, *)
 class NotificationService: UNNotificationServiceExtension {
@@ -51,7 +51,7 @@ class NotificationService: UNNotificationServiceExtension {
             let action = userInfo["what"] as? String ?? "msg"
             let user = store.userGet(uid: xfrom) as? DefaultUser
             let senderName = user?.pub?.fn ?? "Unknown"
-            switch Tinode.topicTypeByName(name: topic) {
+            switch Midnight.topicTypeByName(name: topic) {
             case .p2p:
                 if action == "msg" {
                     bestAttemptContent.title = senderName

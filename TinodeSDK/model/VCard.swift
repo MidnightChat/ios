@@ -2,7 +2,7 @@
 //  VCard.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -123,31 +123,31 @@ public class VCard: Codable, Mergeable {
         let anotherVCard = another as! VCard
         var changed = 0
         if anotherVCard.fn != nil {
-            self.fn = !Tinode.isNull(obj: anotherVCard.fn) ? anotherVCard.fn : nil
+            self.fn = !Midnight.isNull(obj: anotherVCard.fn) ? anotherVCard.fn : nil
             changed += 1
         }
         if anotherVCard.title != nil {
-            self.title = !Tinode.isNull(obj: anotherVCard.title) ? anotherVCard.title : nil
+            self.title = !Midnight.isNull(obj: anotherVCard.title) ? anotherVCard.title : nil
             changed += 1
         }
         if anotherVCard.org != nil {
-            self.org = !Tinode.isNull(obj: anotherVCard.org) ? anotherVCard.org : nil
+            self.org = !Midnight.isNull(obj: anotherVCard.org) ? anotherVCard.org : nil
             changed += 1
         }
         if anotherVCard.tel != nil {
-            self.tel = !Tinode.isNull(obj: anotherVCard.tel) ? anotherVCard.tel : nil
+            self.tel = !Midnight.isNull(obj: anotherVCard.tel) ? anotherVCard.tel : nil
             changed += 1
         }
         if anotherVCard.email != nil {
-            self.email = !Tinode.isNull(obj: anotherVCard.email) ? anotherVCard.email : nil
+            self.email = !Midnight.isNull(obj: anotherVCard.email) ? anotherVCard.email : nil
             changed += 1
         }
         if anotherVCard.impp != nil {
-            self.impp = !Tinode.isNull(obj: anotherVCard.impp) ? anotherVCard.impp : nil
+            self.impp = !Midnight.isNull(obj: anotherVCard.impp) ? anotherVCard.impp : nil
             changed += 1
         }
         if anotherVCard.photo != nil {
-            self.photo = !Tinode.isNull(obj: anotherVCard.photo) ? anotherVCard.photo : nil
+            self.photo = !Midnight.isNull(obj: anotherVCard.photo) ? anotherVCard.photo : nil
             changed += 1
         }
         return changed

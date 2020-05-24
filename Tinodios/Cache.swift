@@ -1,13 +1,13 @@
 //
 //  Cache.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 import Firebase
 
 class Cache {
@@ -17,32 +17,32 @@ class Cache {
         public static let kHostName = "127.0.0.1:6060" // localhost
         public static let kUseTLS = false
     #else
-        public static let kHostName = "api.tinode.co" // production cluster
+        public static let kHostName = "api.midnight.co" // production cluster
         public static let kUseTLS = true
     #endif
 
     private static let kApiKey = "AQEAAAABAAD_rAp4DJh05a1HAwFT3A6K"
 
-    private var tinode: Tinode? = nil
+    private var midnight: Midnight? = nil
     private var timer = RepeatingTimer(timeInterval: 60 * 60 * 4) // Once every 4 hours.
     private var largeFileHelper: LargeFileHelper? = nil
-    private var queue = DispatchQueue(label: "co.tinode.cache")
-    internal static let log = TinodeSDK.Log(subsystem: "co.tinode.tinodios")
+    private var queue = DispatchQueue(label: "co.midnight.cache")
+    internal static let log = MidnightSDK.Log(subsystem: "co.midnight.midnightios")
 
-    public static func getTinode() -> Tinode {
-        return Cache.default.getTinode()
+    public static func getMidnight() -> Midnight {
+        return Cache.default.getMidnight()
     }
     public static func getLargeFileHelper(withIdentifier identifier: String? = nil) -> LargeFileHelper {
         return Cache.default.getLargeFileHelper(withIdentifier: identifier)
     }
     public static func invalidate() {
-        if let tinode = Cache.default.tinode {
+        if let midnight = Cache.default.midnight {
             Cache.default.timer.suspend()
-            tinode.logout()
+            midnight.logout()
             InstanceID.instanceID().deleteID { error in
                 Cache.log.debug("Failed to delete FCM instance id: %@", error.debugDescription)
             }
-            Cache.default.tinode = nil
+            Cache.default.midnight = nil
         }
     }
     public static func isContactSynchronizerActive() -> Bool {
@@ -56,25 +56,25 @@ class Cache {
         Cache.default.timer.eventHandler = { ContactsSynchronizer.default.run() }
         Cache.default.timer.resume()
     }
-    private func getTinode() -> Tinode {
+    private func getMidnight() -> Midnight {
         // TODO: fix tsan false positive.
-        // TSAN fires because one thread may read |tinode| variable
+        // TSAN fires because one thread may read |midnight| variable
         // while another thread may be writing it below in the critical section.
-        if tinode == nil {
+        if midnight == nil {
             queue.sync {
-                if tinode == nil {
+                if midnight == nil {
                     let appVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-                    let appName = "Tinodios/" + appVersion
+                    let appName = "Midnightios/" + appVersion
                     let dbh = BaseDb.getInstance()
                     // FIXME: Get and use current UI language from Bundle.main.preferredLocalizations.first
-                    tinode = Tinode(for: appName,
+                    midnight = Midnight(for: appName,
                                     authenticateWith: Cache.kApiKey,
                                     persistDataIn: dbh.sqlStore)
-                    tinode!.OsVersion = UIDevice.current.systemVersion
+                    midnight!.OsVersion = UIDevice.current.systemVersion
                 }
             }
         }
-        return tinode!
+        return midnight!
     }
     private func getLargeFileHelper(withIdentifier identifier: String?) -> LargeFileHelper {
         if largeFileHelper == nil {
@@ -88,7 +88,7 @@ class Cache {
         return largeFileHelper!
     }
     public static func totalUnreadCount() -> Int {
-        guard let tinode = Cache.default.tinode, let topics = tinode.getTopics() else {
+        guard let midnight = Cache.default.midnight, let topics = midnight.getTopics() else {
             return 0
         }
         return topics.reduce(into: 0, { result, topic in

@@ -59,8 +59,8 @@
 /* Class = "UILabel"; text = "静音"; ObjectID = "AoI-xo-VbS"; */
 "AoI-xo-VbS.text" = "静音";
 
-/* Class = "UILabel"; text = "Tinode"; ObjectID = "BS4-zj-4bf"; */
-"BS4-zj-4bf.text" = "Tinode";
+/* Class = "UILabel"; text = "Midnight"; ObjectID = "BS4-zj-4bf"; */
+"BS4-zj-4bf.text" = "Midnight";
 
 /* Class = "UILabel"; text = "image/jpeg"; ObjectID = "C6Z-tO-4g8"; */
 "C6Z-tO-4g8.text" = "image/jpeg";
@@ -119,8 +119,8 @@
 /* Class = "UILabel"; text = "主题或用户ID"; ObjectID = "RA0-dx-dSp"; */
 "RA0-dx-dSp.text" = "主题或用户ID";
 
-/* Class = "UINavigationItem"; title = "Tinode"; ObjectID = "Rgo-YL-uPZ"; */
-"Rgo-YL-uPZ.title" = "Tinode";
+/* Class = "UINavigationItem"; title = "Midnight"; ObjectID = "Rgo-YL-uPZ"; */
+"Rgo-YL-uPZ.title" = "Midnight";
 
 /* Class = "UIButton"; normalTitle = "注册"; ObjectID = "Rv6-qQ-FqW"; */
 "Rv6-qQ-FqW.normalTitle" = "注册";

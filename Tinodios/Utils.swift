@@ -1,8 +1,8 @@
 //
 //  Utils.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -10,29 +10,29 @@ import MobileCoreServices
 import PhoneNumberKit
 import SwiftKeychainWrapper
 import SwiftWebSocket
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 class Utils {
-    static let kTinodeHasRunBefore = "tinodeHasRunBefore"
-    static let kTinodePrefReadReceipts = "tinodePrefSendReadReceipts"
-    static let kTinodePrefTypingNotifications = "tinodePrefTypingNoficications"
-    static let kTinodePrefLastLogin = "tinodeLastLogin"
+    static let kMidnightHasRunBefore = "midnightHasRunBefore"
+    static let kMidnightPrefReadReceipts = "midnightPrefSendReadReceipts"
+    static let kMidnightPrefTypingNotifications = "midnightPrefTypingNoficications"
+    static let kMidnightPrefLastLogin = "midnightLastLogin"
 
     static var phoneNumberKit: PhoneNumberKit = {
         return PhoneNumberKit()
     }()
 
     public static func getSavedLoginUserName() -> String? {
-        return UserDefaults.standard.string(forKey: Utils.kTinodePrefLastLogin)
+        return UserDefaults.standard.string(forKey: Utils.kMidnightPrefLastLogin)
     }
 
     public static func getAuthToken() -> String? {
         let userDefaults = UserDefaults.standard
-        guard userDefaults.bool(forKey: Utils.kTinodeHasRunBefore) else {
+        guard userDefaults.bool(forKey: Utils.kMidnightHasRunBefore) else {
             // Clear the app keychain.
             KeychainWrapper.standard.removeAllKeys()
-            userDefaults.set(true, forKey: Utils.kTinodeHasRunBefore)
+            userDefaults.set(true, forKey: Utils.kMidnightHasRunBefore)
             return nil
         }
         return KeychainWrapper.standard.string(
@@ -41,12 +41,12 @@ class Utils {
 
     public static func removeAuthToken() {
         let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: Utils.kTinodePrefLastLogin)
+        userDefaults.removeObject(forKey: Utils.kMidnightPrefLastLogin)
         KeychainWrapper.standard.removeAllKeys()
     }
 
     public static func saveAuthToken(for userName: String, token: String?) {
-        UserDefaults.standard.set(userName, forKey: Utils.kTinodePrefLastLogin)
+        UserDefaults.standard.set(userName, forKey: Utils.kMidnightPrefLastLogin)
         if let token = token, !token.isEmpty {
             let tokenSaveSuccessful = KeychainWrapper.standard.set(token, forKey: LoginViewController.kTokenKey, withAccessibility: .afterFirstUnlock)
             if !tokenSaveSuccessful {
@@ -58,8 +58,8 @@ class Utils {
     public static func registerUserDefaults() {
         /// Here you can give default values to your UserDefault keys
         UserDefaults.standard.register(defaults: [
-            Utils.kTinodePrefReadReceipts: true,
-            Utils.kTinodePrefTypingNotifications: true
+            Utils.kMidnightPrefReadReceipts: true,
+            Utils.kMidnightPrefTypingNotifications: true
         ])
 
         let (hostName, _, _) = SettingsHelper.getConnectionSettings()
@@ -148,20 +148,20 @@ class Utils {
             return false
         }
         Cache.log.info("Connect&Login Sync - will attempt to login (user name: %@)", userName)
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         var success = false
         do {
-            tinode.setAutoLoginWithToken(token: token)
-            // Tinode.connect() will automatically log in.
-            let msg = try tinode.connectDefault()?.getResult()
+            midnight.setAutoLoginWithToken(token: token)
+            // Midnight.connect() will automatically log in.
+            let msg = try midnight.connectDefault()?.getResult()
             if let code = msg?.ctrl?.code {
                 // Assuming success by default.
                 success = true
                 switch code {
                 case 0..<300:
-                    Cache.log.info("Connect&Login Sync - login successful for: %@", tinode.myUid!)
-                    if tinode.authToken != token {
-                        Utils.saveAuthToken(for: userName, token: tinode.authToken)
+                    Cache.log.info("Connect&Login Sync - login successful for: %@", midnight.myUid!)
+                    if midnight.authToken != token {
+                        Utils.saveAuthToken(for: userName, token: midnight.authToken)
                     }
                 case 409:
                     Cache.log.info("Connect&Login Sync - already authenticated.")
@@ -173,10 +173,10 @@ class Utils {
             }
         } catch SwiftWebSocket.WebSocketError.network(let e)  {
             // No network connection.
-            Cache.log.debug("Connect&Login Sync [network] - could not connect to Tinode: %@", e)
+            Cache.log.debug("Connect&Login Sync [network] - could not connect to Midnight: %@", e)
             success = true
         } catch {
-            Cache.log.error("Connect&Login Sync - failed to automatically login to Tinode: %@", error.localizedDescription)
+            Cache.log.error("Connect&Login Sync - failed to automatically login to Midnight: %@", error.localizedDescription)
         }
         return success
     }
@@ -293,7 +293,7 @@ extension URL {
     }
 }
 
-extension Tinode {
+extension Midnight {
     func connectDefault() throws -> PromisedReply<ServerMessage>? {
         let (hostName, useTLS, _) = SettingsHelper.getConnectionSettings()
         Cache.log.debug("Connecting to %@, secure %@", hostName ?? Cache.kHostName, useTLS ?? Cache.kUseTLS ? "YES" : "NO")

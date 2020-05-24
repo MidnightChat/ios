@@ -1,13 +1,13 @@
 //
 //  ImagePreviewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019-2020 Tinode. All rights reserved.
+//  Copyright © 2019-2020 Midnight. All rights reserved.
 //
 
 // Shows full-screen
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 struct ImagePreviewContent {
     enum ImageContent {

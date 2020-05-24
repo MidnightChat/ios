@@ -28,15 +28,15 @@
 		0A44B00D2244AAC500A98866 /* AcsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A431BE92244A14B00A837F7 /* AcsHelper.swift */; };
 		0A44B00E2244AAC500A98866 /* ClientMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A431BEA2244A14B00A837F7 /* ClientMessages.swift */; };
 		0A56CCE522759078006E2952 /* TinodeSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56CCE422759078006E2952 /* TinodeSDKTests.swift */; };
-		0A56CCE722759078006E2952 /* TinodeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A431BDC2244A0BE00A837F7 /* TinodeSDK.framework */; };
+		0A56CCE722759078006E2952 /* MidnightSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A431BDC2244A0BE00A837F7 /* MidnightSDK.framework */; };
 		0A610453227563E200C6A9D2 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610452227563E200C6A9D2 /* Log.swift */; };
 		0A81B317236FA896009AF14B /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A81B316236FA896009AF14B /* Types.swift */; };
 		0AAF8BEC23B70E2A00C9CFBB /* MsgRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF8BEB23B70E2A00C9CFBB /* MsgRange.swift */; };
 		94CD577D9DA889C043928B4C /* Pods_TinodeSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF75C7301A406947462E1C7D /* Pods_TinodeSDKTests.framework */; };
-		9C88C579E43E9FD3687DD093 /* Pods_TinodeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679C08F81F0F4B80EE066C70 /* Pods_TinodeSDK.framework */; };
 		B0876010243F1C3E00B464D1 /* MeTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B087600F243F1C3E00B464D1 /* MeTopic.swift */; };
 		B0876012243F1DD900B464D1 /* FndTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0876011243F1DD900B464D1 /* FndTopic.swift */; };
 		B0876014243F1E4000B464D1 /* ComTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0876013243F1E4000B464D1 /* ComTopic.swift */; };
+		FA34647E247AC7A500300B11 /* Pods_MidnightSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34647D247AC7A500300B11 /* Pods_MidnightSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 
 /* Begin PBXFileReference section */
 		0A03AFD222759566003F6248 /* DraftyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftyTest.swift; sourceTree = "<group>"; };
-		0A431BDC2244A0BE00A837F7 /* TinodeSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TinodeSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A431BDC2244A0BE00A837F7 /* MidnightSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MidnightSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A431BDF2244A0BE00A837F7 /* TinodeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TinodeSDK.h; sourceTree = "<group>"; };
 		0A431BE02244A0BE00A837F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A431BE72244A14B00A837F7 /* JSONValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		0A431BF82244A14D00A837F7 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		0A431BF92244A14D00A837F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A44B0102247573C00A98866 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A56CCE222759078006E2952 /* TinodeSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinodeSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A56CCE222759078006E2952 /* MidnightSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MidnightSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A56CCE422759078006E2952 /* TinodeSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinodeSDKTests.swift; sourceTree = "<group>"; };
 		0A56CCE622759078006E2952 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A610452227563E200C6A9D2 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -89,6 +89,7 @@
 		B4211CF84B51039364CC4DD3 /* Pods-TinodeSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinodeSDK.debug.xcconfig"; path = "./Pods/Target Support Files/Pods-TinodeSDK/Pods-TinodeSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		BF75C7301A406947462E1C7D /* Pods_TinodeSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinodeSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80621A4BCCAF3C0B58C06E5 /* Pods-TinodeSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinodeSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinodeSDK/Pods-TinodeSDK.release.xcconfig"; sourceTree = "<group>"; };
+		FA34647D247AC7A500300B11 /* Pods_MidnightSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MidnightSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6888AEFAE0E94A350A75E8 /* Pods-TinodeSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinodeSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinodeSDKTests/Pods-TinodeSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C88C579E43E9FD3687DD093 /* Pods_TinodeSDK.framework in Frameworks */,
+				FA34647E247AC7A500300B11 /* Pods_MidnightSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A56CCE722759078006E2952 /* TinodeSDK.framework in Frameworks */,
+				0A56CCE722759078006E2952 /* MidnightSDK.framework in Frameworks */,
 				94CD577D9DA889C043928B4C /* Pods_TinodeSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,8 +128,8 @@
 		0A431BDD2244A0BE00A837F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A431BDC2244A0BE00A837F7 /* TinodeSDK.framework */,
-				0A56CCE222759078006E2952 /* TinodeSDKTests.xctest */,
+				0A431BDC2244A0BE00A837F7 /* MidnightSDK.framework */,
+				0A56CCE222759078006E2952 /* MidnightSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +201,7 @@
 		E5812F8A21FE2118756F29A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA34647D247AC7A500300B11 /* Pods_MidnightSDK.framework */,
 				0A44B0102247573C00A98866 /* SwiftWebSocket.framework */,
 				679C08F81F0F4B80EE066C70 /* Pods_TinodeSDK.framework */,
 				BF75C7301A406947462E1C7D /* Pods_TinodeSDKTests.framework */,
@@ -221,9 +223,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0A431BDB2244A0BE00A837F7 /* TinodeSDK */ = {
+		0A431BDB2244A0BE00A837F7 /* MidnightSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A431BE42244A0BE00A837F7 /* Build configuration list for PBXNativeTarget "TinodeSDK" */;
+			buildConfigurationList = 0A431BE42244A0BE00A837F7 /* Build configuration list for PBXNativeTarget "MidnightSDK" */;
 			buildPhases = (
 				10BAED752489B32660F6CF41 /* [CP] Check Pods Manifest.lock */,
 				0A431BD72244A0BE00A837F7 /* Headers */,
@@ -235,14 +237,14 @@
 			);
 			dependencies = (
 			);
-			name = TinodeSDK;
+			name = MidnightSDK;
 			productName = TinodeSDK;
-			productReference = 0A431BDC2244A0BE00A837F7 /* TinodeSDK.framework */;
+			productReference = 0A431BDC2244A0BE00A837F7 /* MidnightSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0A56CCE122759078006E2952 /* TinodeSDKTests */ = {
+		0A56CCE122759078006E2952 /* MidnightSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A56CCEC22759078006E2952 /* Build configuration list for PBXNativeTarget "TinodeSDKTests" */;
+			buildConfigurationList = 0A56CCEC22759078006E2952 /* Build configuration list for PBXNativeTarget "MidnightSDKTests" */;
 			buildPhases = (
 				11CE15399BDFA482926A8220 /* [CP] Check Pods Manifest.lock */,
 				0A56CCDE22759078006E2952 /* Sources */,
@@ -255,9 +257,9 @@
 			dependencies = (
 				0A56CCE922759078006E2952 /* PBXTargetDependency */,
 			);
-			name = TinodeSDKTests;
+			name = MidnightSDKTests;
 			productName = TinodeSDKTests;
-			productReference = 0A56CCE222759078006E2952 /* TinodeSDKTests.xctest */;
+			productReference = 0A56CCE222759078006E2952 /* MidnightSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -268,7 +270,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = Tinode;
+				ORGANIZATIONNAME = Midnight;
 				TargetAttributes = {
 					0A431BDB2244A0BE00A837F7 = {
 						CreatedOnToolsVersion = 10.1;
@@ -279,7 +281,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A431BD62244A0BE00A837F7 /* Build configuration list for PBXProject "TinodeSDK" */;
+			buildConfigurationList = 0A431BD62244A0BE00A837F7 /* Build configuration list for PBXProject "MidnightSDK" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -291,8 +293,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A431BDB2244A0BE00A837F7 /* TinodeSDK */,
-				0A56CCE122759078006E2952 /* TinodeSDKTests */,
+				0A431BDB2244A0BE00A837F7 /* MidnightSDK */,
+				0A56CCE122759078006E2952 /* MidnightSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -429,7 +431,7 @@
 /* Begin PBXTargetDependency section */
 		0A56CCE922759078006E2952 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A431BDB2244A0BE00A837F7 /* TinodeSDK */;
+			target = 0A431BDB2244A0BE00A837F7 /* MidnightSDK */;
 			targetProxy = 0A56CCE822759078006E2952 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -567,7 +569,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TinodeSDK/Info.plist;
+				INFOPLIST_FILE = MidnightSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -576,7 +578,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.ios.TinodeSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.ios.MidnightSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -595,7 +597,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TinodeSDK/Info.plist;
+				INFOPLIST_FILE = MidnightSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -604,7 +606,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.ios.TinodeSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.ios.MidnightSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -618,7 +620,7 @@
 			baseConfigurationReference = 79834550805DF1A314040328 /* Pods-TinodeSDKTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TinodeSDKTests/Info.plist;
+				INFOPLIST_FILE = MidnightSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -630,7 +632,7 @@
 					"-iquote",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftWebSocket-iOS9.0/SwiftWebSocket.framework/Headers\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.ios.TinodeSDKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.ios.MidnightSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -642,7 +644,7 @@
 			baseConfigurationReference = FD6888AEFAE0E94A350A75E8 /* Pods-TinodeSDKTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TinodeSDKTests/Info.plist;
+				INFOPLIST_FILE = MidnightSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,7 +656,7 @@
 					"-iquote",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftWebSocket-iOS9.0/SwiftWebSocket.framework/Headers\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.ios.TinodeSDKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.ios.MidnightSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -664,7 +666,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A431BD62244A0BE00A837F7 /* Build configuration list for PBXProject "TinodeSDK" */ = {
+		0A431BD62244A0BE00A837F7 /* Build configuration list for PBXProject "MidnightSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A431BE22244A0BE00A837F7 /* Debug */,
@@ -673,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A431BE42244A0BE00A837F7 /* Build configuration list for PBXNativeTarget "TinodeSDK" */ = {
+		0A431BE42244A0BE00A837F7 /* Build configuration list for PBXNativeTarget "MidnightSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A431BE52244A0BE00A837F7 /* Debug */,
@@ -682,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A56CCEC22759078006E2952 /* Build configuration list for PBXNativeTarget "TinodeSDKTests" */ = {
+		0A56CCEC22759078006E2952 /* Build configuration list for PBXNativeTarget "MidnightSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A56CCEA22759078006E2952 /* Debug */,

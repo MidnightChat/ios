@@ -2,12 +2,12 @@
 //  BaseDb.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import SQLite
-import TinodeSDK
+import MidnightSDK
 
 public class BaseDb {
     // Current database schema version. Increment on schema changes.
@@ -33,7 +33,7 @@ public class BaseDb {
     // Object is a deletion range marker synchronized with the server.
     public static let kStatusDeletedSynced = 7
 
-    public static let kBundleId = "co.tinode.tinodios.db"
+    public static let kBundleId = "co.midnight.midnightios.db"
     // No direct access to the shared instance.
     private static var `default`: BaseDb? = nil
     private static let accessQueue = DispatchQueue(label: BaseDb.kBundleId)
@@ -52,7 +52,7 @@ public class BaseDb {
     }
     public var isReady: Bool { get { return self.account != nil && !self.isCredValidationRequired } }
 
-    internal static let log = TinodeSDK.Log(subsystem: BaseDb.kBundleId)
+    internal static let log = MidnightSDK.Log(subsystem: BaseDb.kBundleId)
 
     /// The init is private to ensure that the class is a singleton.
     private init() {

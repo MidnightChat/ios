@@ -1,8 +1,8 @@
 //
 //  FindViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Contacts
@@ -160,8 +160,8 @@ class FindViewController: UITableViewController, FindDisplayLogic {
     }
 
     @IBAction func inviteActionClicked(_ sender: Any) {
-        let inviteSubject = NSLocalizedString("Check out Tinode Messenger", comment: "Invitation subject")
-        let inviteBody = NSLocalizedString("Check out Tinode Messenger: https://tinode.co/", comment: "Invitation body")
+        let inviteSubject = NSLocalizedString("Check out Midnight Messenger", comment: "Invitation subject")
+        let inviteBody = NSLocalizedString("Check out Midnight Messenger: https://midnight.co/", comment: "Invitation body")
         let attrs = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0) ]
         let dialogTitle = NSAttributedString(string: NSLocalizedString("Invite", comment: "Dialog title: call to action"), attributes: attrs)
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

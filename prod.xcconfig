@@ -3,12 +3,12 @@
 //
 
 // Include Pods config.
-#include "Pods/Target Support Files/Pods-Tinodios/Pods-Tinodios.release.xcconfig"
+#include "Pods/Target Support Files/Pods-Midnightios/Pods-Midnightios.release.xcconfig"
 
 // Server URL
-HOST_NAME = api.tinode.co
+HOST_NAME = api.midnight.co
 // Use TLS (https, wss)
 USE_TLS = YES
 
 // App Settings
-APP_NAME = Tinode
+APP_NAME = Midnight

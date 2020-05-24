@@ -1,14 +1,14 @@
 //
-//  TinodeSDKTests.swift
-//  TinodeSDKTests
+//  MidnightSDKTests.swift
+//  MidnightSDKTests
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import XCTest
 
-// TODO: add tests for Tinode here.
-class TinodeSDKTests: XCTestCase {
+// TODO: add tests for Midnight here.
+class MidnightSDKTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -3,7 +3,7 @@
 //
 
 // Include Pods config.
-#include "Pods/Target Support Files/Pods-Tinodios/Pods-Tinodios.debug.xcconfig"
+#include "Pods/Target Support Files/Pods-Midnightios/Pods-Midnightios.debug.xcconfig"
 
 // Server URL
 HOST_NAME = 127.0.0.1:6060
@@ -11,4 +11,4 @@ HOST_NAME = 127.0.0.1:6060
 USE_TLS = NO
 
 // App Settings
-APP_NAME = Tinode (test)
+APP_NAME = Midnight (test)

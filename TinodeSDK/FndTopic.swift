@@ -1,16 +1,16 @@
 //
 //  FndTopic.swift
-//  TinodeSDK
+//  MidnightSDK
 //
-//  Copyright © 2020 Tinode. All rights reserved.
+//  Copyright © 2020 Midnight. All rights reserved.
 //
 
 import Foundation
 
 
 public class FndTopic<SP: Codable>: Topic<String, String, SP, Array<String>> {
-    init(tinode: Tinode?) {
-        super.init(tinode: tinode, name: Tinode.kTopicFnd)
+    init(midnight: Midnight?) {
+        super.init(midnight: midnight, name: Midnight.kTopicFnd)
     }
 
     @discardableResult

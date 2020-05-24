@@ -1,18 +1,18 @@
 //
-//  TinodiosDB.h
-//  TinodiosDB
+//  MidnightiosDB.h
+//  MidnightiosDB
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for TinodiosDB.
-FOUNDATION_EXPORT double TinodiosDBVersionNumber;
+//! Project version number for MidnightiosDB.
+FOUNDATION_EXPORT double MidnightiosDBVersionNumber;
 
-//! Project version string for TinodiosDB.
-FOUNDATION_EXPORT const unsigned char TinodiosDBVersionString[];
+//! Project version string for MidnightiosDB.
+FOUNDATION_EXPORT const unsigned char MidnightiosDBVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <TinodiosDB/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <MidnightiosDB/PublicHeader.h>
 
 

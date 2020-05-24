@@ -2,11 +2,11 @@
 //  StoredMessage.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
+import MidnightSDK
 
 public class StoredMessage : MsgServerData, Message {
     public var msgId: Int64 = 0

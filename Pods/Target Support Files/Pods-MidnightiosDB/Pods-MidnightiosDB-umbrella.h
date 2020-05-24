@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_TinodiosVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_TinodiosVersionString[];
+FOUNDATION_EXPORT double Pods_MidnightiosDBVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MidnightiosDBVersionString[];
 

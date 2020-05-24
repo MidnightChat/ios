@@ -1,13 +1,13 @@
 //
 //  AccountSettingsViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import MessageUI
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 import UIKit
 
 class AccountSettingsViewController: UITableViewController {
@@ -42,7 +42,7 @@ class AccountSettingsViewController: UITableViewController {
     @IBOutlet weak var actionLogOut: UITableViewCell!
     @IBOutlet weak var actionDeleteAccount: UITableViewCell!
 
-    weak var tinode: Tinode!
+    weak var midnight: Midnight!
     weak var me: DefaultMeTopic!
     private var imagePicker: ImagePicker!
 
@@ -61,8 +61,8 @@ class AccountSettingsViewController: UITableViewController {
         reloadData()
     }
     private func setup() {
-        self.tinode = Cache.getTinode()
-        self.me = self.tinode.getMeTopic()!
+        self.midnight = Cache.getMidnight()
+        self.me = self.midnight.getMeTopic()!
 
         UiUtils.setupTapRecognizer(
             forView: topicTitleTextView,
@@ -124,16 +124,16 @@ class AccountSettingsViewController: UITableViewController {
 
         self.incognitoModeSwitch.setOn(me.isMuted, animated: false)
         self.sendReadReceiptsSwitch.setOn(
-            userDefaults.bool(forKey: Utils.kTinodePrefReadReceipts),
+            userDefaults.bool(forKey: Utils.kMidnightPrefReadReceipts),
             animated: false)
         self.sendTypingNotificationsSwitch.setOn(
-            userDefaults.bool(forKey: Utils.kTinodePrefTypingNotifications),
+            userDefaults.bool(forKey: Utils.kMidnightPrefTypingNotifications),
             animated: false)
         // My UID/Address label.
-        self.myUIDLabel.text = self.tinode.myUid
+        self.myUIDLabel.text = self.midnight.myUid
         self.myUIDLabel.sizeToFit()
         // Avatar.
-        self.avatarImage.set(icon: me.pub?.photo?.image(), title: me.pub?.fn, id: self.tinode.myUid)
+        self.avatarImage.set(icon: me.pub?.photo?.image(), title: me.pub?.fn, id: self.midnight.myUid)
         self.avatarImage.letterTileFont = self.avatarImage.letterTileFont.withSize(CGFloat(50))
         // Permissions.
         self.authPermissionsLabel.text = me.defacs?.getAuth() ?? ""
@@ -205,11 +205,11 @@ class AccountSettingsViewController: UITableViewController {
     }
     
     @IBAction func readReceiptsClicked(_ sender: Any) {
-        UserDefaults.standard.set(self.sendReadReceiptsSwitch.isOn, forKey: Utils.kTinodePrefReadReceipts)
+        UserDefaults.standard.set(self.sendReadReceiptsSwitch.isOn, forKey: Utils.kMidnightPrefReadReceipts)
     }
 
     @IBAction func typingNotificationsClicked(_ sender: Any) {
-        UserDefaults.standard.set(self.sendTypingNotificationsSwitch.isOn, forKey: Utils.kTinodePrefTypingNotifications)
+        UserDefaults.standard.set(self.sendTypingNotificationsSwitch.isOn, forKey: Utils.kMidnightPrefTypingNotifications)
     }
 
     @IBAction func loadAvatarClicked(_ sender: Any) {
@@ -364,18 +364,18 @@ class AccountSettingsViewController: UITableViewController {
     }
 
     @objc func termsOfUseClicked(sender: UITapGestureRecognizer) {
-        UIApplication.shared.open(URL(string: "https://tinode.co/terms.html")!)
+        UIApplication.shared.open(URL(string: "https://midnight.co/terms.html")!)
     }
 
     @objc func privacyPolicyClicked(sender: UITapGestureRecognizer) {
-        UIApplication.shared.open(URL(string: "https://tinode.co/privacy.html")!)
+        UIApplication.shared.open(URL(string: "https://midnight.co/privacy.html")!)
     }
 
     @objc func contactUsClicked(sender: UITapGestureRecognizer) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["mailto:info@tinode.co"])
+            mail.setToRecipients(["mailto:info@midnight.co"])
             present(mail, animated: true)
         } else {
             UiUtils.showToast(message: NSLocalizedString("Cannot send email: functionality not accessible.", comment: "Error message"))
@@ -395,7 +395,7 @@ class AccountSettingsViewController: UITableViewController {
             }
             return
         }
-        tinode.updateAccountBasic(uid: nil, username: userName, password: newPassword).then(
+        midnight.updateAccountBasic(uid: nil, username: userName, password: newPassword).then(
             onSuccess: nil,
             onFailure: { err in
                 DispatchQueue.main.async {
@@ -426,7 +426,7 @@ class AccountSettingsViewController: UITableViewController {
 
     private func deleteAccount() {
         Cache.log.info("AccountSettingsVC - deleting account")
-        tinode.delCurrentUser(hard: true).thenApply { _ in
+        midnight.delCurrentUser(hard: true).thenApply { _ in
             UiUtils.logoutAndRouteToLoginVC()
             return nil
         }

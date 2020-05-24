@@ -1,13 +1,13 @@
 //
 //  MessageViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 protocol MessageDisplayLogic: class {
     func updateTitleBar(icon: UIImage?, title: String?, online: Bool)
@@ -131,12 +131,12 @@ class MessageViewController: UIViewController {
 
     var topicName: String? {
         didSet {
-            topicType = Tinode.topicTypeByName(name: self.topicName)
+            topicType = Midnight.topicTypeByName(name: self.topicName)
             // Needed in order to get sender's avatar and display name
-            let tinode = Cache.getTinode()
-            topic = tinode.getTopic(topicName: topicName!) as? DefaultComTopic
+            let midnight = Cache.getMidnight()
+            topic = midnight.getTopic(topicName: topicName!) as? DefaultComTopic
             if topic == nil {
-                topic = tinode.newTopic(for: topicName!) as? DefaultComTopic
+                topic = midnight.newTopic(for: topicName!) as? DefaultComTopic
             }
         }
     }
@@ -149,7 +149,7 @@ class MessageViewController: UIViewController {
     // Messages to be displayed
     var messages: [Message] = []
     // For updating individual messages, we need:
-    // * Tinode sequence id -> messages offset.
+    // * Midnight sequence id -> messages offset.
     var messageSeqIdIndex: [Int:Int] = [:]
     // * Database message id -> message offset.
     var messageDbIdIndex: [Int64:Int] = [:]
@@ -203,7 +203,7 @@ class MessageViewController: UIViewController {
     }
 
     private func setup() {
-        myUID = Cache.getTinode().myUid
+        myUID = Cache.getMidnight().myUid
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, editable: false)
 
         let interactor = MessageInteractor()
@@ -1037,7 +1037,7 @@ extension MessageViewController : MessageCellDelegate {
     func didTapContent(in cell: MessageCell, url: URL?) {
         guard let url = url else { return }
 
-        if url.scheme == "tinode" {
+        if url.scheme == "midnight" {
             switch url.path {
             case "/post":
                 handleButtonPost(in: cell, using: url)
@@ -1050,7 +1050,7 @@ extension MessageViewController : MessageCellDelegate {
             case "/preview-image":
                 showImagePreview(in: cell)
             default:
-                Cache.log.error("MessageVC - unknown tinode:// action: %@", url.path)
+                Cache.log.error("MessageVC - unknown midnight:// action: %@", url.path)
                 break
             }
             return

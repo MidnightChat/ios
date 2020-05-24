@@ -1,8 +1,8 @@
 //
 //  RichTextLabel.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
@@ -63,9 +63,9 @@ class RichTextView : UITextView {
         }
 
         if attachment.image != nil {
-            return URL(string: "tinode:///preview-image")
+            return URL(string: "midnight:///preview-image")
         }
 
-        return URL(string: "tinode:///generic-attachment")
+        return URL(string: "midnight:///generic-attachment")
     }
 }

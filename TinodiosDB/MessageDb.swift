@@ -2,12 +2,12 @@
 //  MessageDb.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import SQLite
-import TinodeSDK
+import MidnightSDK
 
 enum MessageDbError: Error {
     case dataError(String)
@@ -119,7 +119,7 @@ public class MessageDb {
                 setters.append(self.ts <- msg.ts)
                 setters.append(self.seq <- msg.seq)
                 if let h = msg.head {
-                    setters.append(self.head <- Tinode.serializeObject(h))
+                    setters.append(self.head <- Midnight.serializeObject(h))
                 }
                 setters.append(self.content <- msg.content?.serialize())
                 msg.msgId = try db.run(self.table.insert(setters))
@@ -284,7 +284,7 @@ public class MessageDb {
         sm.from = r[self.sender]
         sm.ts = r[self.ts]
         sm.seq = r[self.seq]
-        sm.head = Tinode.deserializeObject(from: r[self.head])
+        sm.head = Midnight.deserializeObject(from: r[self.head])
         sm.content = Drafty.deserialize(from: r[self.content])
         return sm
     }

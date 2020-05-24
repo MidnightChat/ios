@@ -1,8 +1,8 @@
 //
 //  MeTopic.swift
-//  TinodeSDK
+//  MidnightSDK
 //
-//  Copyright © 2020 Tinode. All rights reserved.
+//  Copyright © 2020 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -29,22 +29,22 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
 
     private var credentials: [Credential]? = nil
 
-    public init(tinode: Tinode?) {
-        super.init(tinode: tinode, name: Tinode.kTopicMe, l: nil)
+    public init(midnight: Midnight?) {
+        super.init(midnight: midnight, name: Midnight.kTopicMe, l: nil)
     }
-    public init(tinode: Tinode?, l: MeTopic<DP>.Listener?) {
-        super.init(tinode: tinode, name: Tinode.kTopicMe, l: l)
+    public init(midnight: Midnight?, l: MeTopic<DP>.Listener?) {
+        super.init(midnight: midnight, name: Midnight.kTopicMe, l: l)
     }
-    public init(tinode: Tinode?, desc: Description<DP, PrivateType>) {
-        super.init(tinode: tinode, name: Tinode.kTopicMe, desc: desc)
+    public init(midnight: Midnight?, desc: Description<DP, PrivateType>) {
+        super.init(midnight: midnight, name: Midnight.kTopicMe, desc: desc)
     }
 
     public func serializeCreds() -> String? {
         guard let c = self.creds else { return nil }
-        return Tinode.serializeObject(c)
+        return Midnight.serializeObject(c)
     }
     public func deserializeCreds(from data: String?) -> Bool {
-        if let c: [Credential]? = Tinode.deserializeObject(from: data) {
+        if let c: [Credential]? = Midnight.deserializeObject(from: data) {
             self.creds = c
             return true
         }
@@ -56,7 +56,7 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
     }
 
     override public var subsUpdated: Date? {
-        get { return tinode?.topicsUpdated }
+        get { return midnight?.topicsUpdated }
     }
 
     override func loadSubs() -> Int {
@@ -80,7 +80,7 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
     }
 
     public func delCredential(_ cred: Credential) -> PromisedReply<ServerMessage> {
-        let tnd = tinode!
+        let tnd = midnight!
 
         return tnd.delCredential(cred: cred)
             .thenApply { [weak self] msg in
@@ -114,7 +114,7 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
 
     override public func topicLeft(unsub: Bool?, code: Int?, reason: String?) {
         super.topicLeft(unsub: unsub, code: code, reason: reason)
-        if let topics = tinode?.getTopics() {
+        if let topics = midnight?.getTopics() {
             for t in topics {
                 t.online = false
             }
@@ -184,14 +184,14 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
             return
         }
 
-        if what == .kUpd && Tinode.kTopicMe == pres.src {
+        if what == .kUpd && Midnight.kTopicMe == pres.src {
             // Me's desc was updated, fetch the updated version.
             getMeta(query: metaGetBuilder().withDesc().build())
             return
         }
 
         // "what":"tags" may have src == nil
-        if let topic = pres.src != nil ? tinode!.getTopic(topicName: pres.src!) : nil {
+        if let topic = pres.src != nil ? midnight!.getTopic(topicName: pres.src!) : nil {
             switch what {
             case .kOn: // topic came online
                 topic.online = true
@@ -200,7 +200,7 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
                 topic.lastSeen = LastSeen(when: Date(), ua: nil)
             case .kMsg: // new message received
                 topic.seq = pres.seq
-                if pres.act == nil || tinode!.isMe(uid: pres.act!) {
+                if pres.act == nil || midnight!.isMe(uid: pres.act!) {
                     assignRead(to: topic, read: pres.seq)
                 }
                 topic.touched = Date()
@@ -219,31 +219,31 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
             case .kGone:
                 // If topic is unknown (==nil), then we don't care to unregister it.
                 topic.persist(false)
-                tinode!.stopTrackingTopic(topicName: pres.src!)
+                midnight!.stopTrackingTopic(topicName: pres.src!)
             case .kDel: // messages deleted
                 // Explicitly ignored: 'me' topic has no messages.
                 break
             default:
-                Tinode.log.error("ME.pres message - unknown what: %@", String(describing: pres.what))
+                Midnight.log.error("ME.pres message - unknown what: %@", String(describing: pres.what))
             }
         } else {
             // nil (me) or a previously unknown topic
             switch what {
             case .kAcs:
-                if pres.src != nil && pres.src != Tinode.kTopicMe {
+                if pres.src != nil && pres.src != Midnight.kTopicMe {
                     let acs = Acs()
                     acs.update(from: pres.dacs)
                     if acs.isModeDefined {
                         getMeta(query: metaGetBuilder().withSub(user: pres.src).build())
                     } else {
-                        Tinode.log.error("ME.acs - unexpected access mode: %@", String(describing: pres.dacs))
+                        Midnight.log.error("ME.acs - unexpected access mode: %@", String(describing: pres.dacs))
                     }
                 }
             case .kTags:
                 // Account tags updated
                 getMeta(query: metaGetBuilder().withTags().build())
             default:
-                Tinode.log.error("ME.pres - topic not found: what = %@, src = %@",
+                Midnight.log.error("ME.pres - topic not found: what = %@, src = %@",
                                  String(describing: pres.what), String(describing: pres.src))
             }
         }
@@ -272,10 +272,10 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
     override internal func routeMetaSub(meta: MsgServerMeta) {
         if let metaSubs = meta.sub as? Array<Subscription<DP, PrivateType>> {
             for sub in metaSubs {
-                if let topic = tinode!.getTopic(topicName: sub.topic!) {
+                if let topic = midnight!.getTopic(topicName: sub.topic!) {
                     if sub.deleted != nil {
                         topic.persist(false)
-                        tinode!.stopTrackingTopic(topicName: sub.topic!)
+                        midnight!.stopTrackingTopic(topicName: sub.topic!)
                     } else {
                         if let t = topic as? DefaultTopic {
                             t.update(sub: sub as! Subscription<VCard, PrivateType>)
@@ -285,12 +285,12 @@ open class MeTopic<DP: Codable & Mergeable>: Topic<DP, PrivateType, DP, PrivateT
                             t.update(sub: sub)
                         } */
                         else {
-                            Tinode.log.fault("ME.routeMetaSub - failed to update topic %@", String(describing: topic))
+                            Midnight.log.fault("ME.routeMetaSub - failed to update topic %@", String(describing: topic))
                             assert(false)
                         }
                     }
                 } else if sub.deleted == nil {
-                    let topic = tinode!.newTopic(sub: sub)
+                    let topic = midnight!.newTopic(sub: sub)
                     topic.persist(true)
                 }
                 listener?.onMetaSub(sub: sub)

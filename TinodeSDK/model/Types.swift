@@ -1,8 +1,8 @@
 //
 //  Types.swift
-//  TinodeSDK
+//  MidnightSDK
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 public protocol Mergeable {
@@ -29,7 +29,7 @@ extension PrivateType: Mergeable {
             }
             return nil
         }
-        set { self["comment"] = .string(newValue ?? Tinode.kNullValue) }
+        set { self["comment"] = .string(newValue ?? Midnight.kNullValue) }
     }
     public var archived: Bool? {
         get {

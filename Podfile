@@ -6,10 +6,10 @@ use_frameworks!
 # ignore all warnings from all pods
 inhibit_all_warnings!
 
-workspace 'Tinodios'
+workspace 'Midnightios'
 
-project 'Tinodios'
-project 'TinodeSDK'
+project 'Midnightios'
+project 'MidnightSDK'
 
 def sdk_pods
     pod 'SwiftWebSocket', '~> 2.7.0'
@@ -26,23 +26,23 @@ def ui_pods
     pod 'PhoneNumberKit', '~> 3.1'
 end
 
-target 'TinodeSDK' do
-    project 'TinodeSDK'
+target 'MidnightSDK' do
+    project 'MidnightSDK'
     sdk_pods
 end
 
-target 'TinodeSDKTests' do
-    project 'TinodeSDK'
+target 'MidnightSDKTests' do
+    project 'MidnightSDK'
     sdk_pods
 end
 
-target 'TinodiosDB' do
-    project 'TinodiosDB'
+target 'MidnightiosDB' do
+    project 'MidnightiosDB'
     db_pods
 end
 
-target 'Tinodios' do
-    project 'Tinodios'
+target 'Midnightios' do
+    project 'Midnightios'
     sdk_pods
     ui_pods
     db_pods
@@ -53,7 +53,7 @@ end
 
 post_install do | installer |
   require 'fileutils'
-  FileUtils.cp_r('Pods/Target Support Files/Pods-Tinodios/Pods-Tinodios-acknowledgements.plist', 'Tinodios/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+  FileUtils.cp_r('Pods/Target Support Files/Pods-Midnightios/Pods-Midnightios-acknowledgements.plist', 'Midnightios/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
   installer.aggregate_targets.each do |aggregate_target|
     aggregate_target.xcconfigs.each do |config_name, config_file|
       xcconfig_path = aggregate_target.xcconfig_path(config_name)

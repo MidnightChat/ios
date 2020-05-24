@@ -1,13 +1,13 @@
 //
 //  TopicInfoViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 class TopicInfoViewController: UITableViewController {
 
@@ -65,7 +65,7 @@ class TopicInfoViewController: UITableViewController {
 
     var topicName = ""
     private var topic: DefaultComTopic!
-    private var tinode: Tinode!
+    private var midnight: Midnight!
     private var imagePicker: ImagePicker!
 
     private var subscriptions: [Subscription<VCard, PrivateType>]?
@@ -89,8 +89,8 @@ class TopicInfoViewController: UITableViewController {
     }
 
     private func setup() {
-        self.tinode = Cache.getTinode()
-        self.topic = tinode.getTopic(topicName: topicName) as? DefaultComTopic
+        self.midnight = Cache.getMidnight()
+        self.topic = midnight.getTopic(topicName: topicName) as? DefaultComTopic
         guard self.topic != nil else {
             return
         }
@@ -216,7 +216,7 @@ class TopicInfoViewController: UITableViewController {
             onSuccess: UiUtils.ToastSuccessHandler,
             onFailure: { err in
                 self.mutedSwitch.isOn = !isChecked
-                if let e = err as? TinodeError, case .notConnected(_) = e {
+                if let e = err as? MidnightError, case .notConnected(_) = e {
                     UiUtils.showToast(message: NSLocalizedString("You are offline.", comment: "Toast notification"))
                 }
                 return nil
@@ -347,13 +347,13 @@ class TopicInfoViewController: UITableViewController {
 
     private func reportTopic(reason: String) {
         blockContact();
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         // Create and send spam report.
         let msg = Drafty().attachJSON([
             "action": JSONValue.string("report"),
             "target": JSONValue.string(self.topic.name)
             ])
-        _ = tinode.publish(topic: Tinode.kTopicSys, head: Tinode.draftyHeaders(for: msg), content: msg)
+        _ = midnight.publish(topic: Midnight.kTopicSys, head: Midnight.draftyHeaders(for: msg), content: msg)
     }
 
     @objc func deleteGroupClicked(sender: UITapGestureRecognizer) {
@@ -611,7 +611,7 @@ extension TopicInfoViewController {
         // Configure the cell...
         let sub = subscriptions![indexPath.row - 1]
         let uid = sub.user
-        let isMe = self.tinode.isMe(uid: uid)
+        let isMe = self.midnight.isMe(uid: uid)
         let pub = sub.pub
 
         cell.avatar.set(icon: pub?.photo?.image(), title: pub?.fn, id: uid)
@@ -668,7 +668,7 @@ extension TopicInfoViewController {
         }
 
         let sub = subscriptions![indexPath.row - 1]
-        if self.tinode.isMe(uid: sub.user) {
+        if self.midnight.isMe(uid: sub.user) {
             return
         }
 
@@ -731,7 +731,7 @@ extension TopicInfoViewController: EditMembersDelegate {
     }
 
     func editMembersWillChangeState(_: UIView, uid: String, added: Bool, initiallySelected: Bool) -> Bool {
-        return !tinode.isMe(uid: uid) && (added || topic.isAdmin || !initiallySelected)
+        return !midnight.isMe(uid: uid) && (added || topic.isAdmin || !initiallySelected)
     }
 }
 

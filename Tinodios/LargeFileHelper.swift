@@ -1,13 +1,13 @@
 //
 //  LargeFileHelper.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 class Upload {
     var url: URL
@@ -27,7 +27,7 @@ class Upload {
     }
     deinit {
         if let cb = finalCb {
-            cb(nil, TinodeError.invalidState("Topic \(topicId), msg id \(msgId): Could not finish upload. Cancelling."))
+            cb(nil, MidnightError.invalidState("Topic \(topicId), msg id \(msgId): Could not finish upload. Cancelling."))
         }
     }
 }
@@ -47,9 +47,9 @@ class LargeFileHelper: NSObject {
         let config = URLSessionConfiguration.background(withIdentifier: Bundle.main.bundleIdentifier!)
         self.init(config: config)
     }
-    private static func addCommonHeaders(to request: inout URLRequest, using tinode: Tinode) {
-        request.addValue(tinode.apiKey, forHTTPHeaderField: "X-Tinode-APIKey")
-        request.addValue("Token \(tinode.authToken!)", forHTTPHeaderField: "X-Tinode-Auth")
+    private static func addCommonHeaders(to request: inout URLRequest, using midnight: Midnight) {
+        request.addValue(midnight.apiKey, forHTTPHeaderField: "X-Midnight-APIKey")
+        request.addValue("Token \(midnight.authToken!)", forHTTPHeaderField: "X-Midnight-Auth")
     }
     public static func createUploadKey(topicId: String, msgId: Int64) -> String {
         return "\(topicId)-\(msgId)"
@@ -58,18 +58,18 @@ class LargeFileHelper: NSObject {
     func startUpload(filename: String, mimetype: String, d: Data, topicId: String, msgId: Int64,
                      progressCallback: @escaping (Float) -> Void,
                      completionCallback: @escaping (ServerMessage?, Error?) -> Void) {
-        let tinode = Cache.getTinode()
-        guard var url = tinode.baseURL(useWebsocketProtocol: false) else { return }
+        let midnight = Cache.getMidnight()
+        guard var url = midnight.baseURL(useWebsocketProtocol: false) else { return }
         url.appendPathComponent("file/u/")
         let upload = Upload(url: url)
         var request = URLRequest(url: url)
 
         request.httpMethod = "POST"
         request.addValue("Keep-Alive", forHTTPHeaderField: "Connection")
-        request.addValue(tinode.userAgent, forHTTPHeaderField: "User-Agent")
+        request.addValue(midnight.userAgent, forHTTPHeaderField: "User-Agent")
         request.addValue("multipart/form-data; boundary=\(LargeFileHelper.kBoundary)", forHTTPHeaderField: "Content-Type")
 
-        LargeFileHelper.addCommonHeaders(to: &request, using: tinode)
+        LargeFileHelper.addCommonHeaders(to: &request, using: midnight)
 
         var newData = Data()
         let header = LargeFileHelper.kTwoHyphens + LargeFileHelper.kBoundary + LargeFileHelper.kLineEnd +
@@ -110,9 +110,9 @@ class LargeFileHelper: NSObject {
     }
 
     func startDownload(from url: URL) {
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         var request = URLRequest(url: url)
-        LargeFileHelper.addCommonHeaders(to: &request, using: tinode)
+        LargeFileHelper.addCommonHeaders(to: &request, using: midnight)
 
         let task = urlSession.downloadTask(with: request)
         task.resume()
@@ -154,19 +154,19 @@ extension LargeFileHelper: URLSessionTaskDelegate {
         }
         Cache.log.debug("LargeFileHelper - finished task: id = %@, topicId = %@", taskId, upload.topicId)
         guard let response = task.response as? HTTPURLResponse else {
-            uploadError = TinodeError.invalidState(String(format: NSLocalizedString("Upload failed (%@). No server response.", comment: "Error message"), upload.topicId))
+            uploadError = MidnightError.invalidState(String(format: NSLocalizedString("Upload failed (%@). No server response.", comment: "Error message"), upload.topicId))
             return
         }
         guard response.statusCode == 200 else {
-            uploadError = TinodeError.invalidState(String(format: NSLocalizedString("Upload failed (%@): response code %d.", comment: "Error message"), upload.topicId, response.statusCode))
+            uploadError = MidnightError.invalidState(String(format: NSLocalizedString("Upload failed (%@): response code %d.", comment: "Error message"), upload.topicId, response.statusCode))
             return
         }
         guard !upload.responseData.isEmpty else {
-            uploadError = TinodeError.invalidState(String(format: NSLocalizedString("Upload failed (%@): empty response body.", comment: "Error message"), upload.topicId))
+            uploadError = MidnightError.invalidState(String(format: NSLocalizedString("Upload failed (%@): empty response body.", comment: "Error message"), upload.topicId))
             return
         }
         do {
-            serverMsg = try Tinode.jsonDecoder.decode(ServerMessage.self, from: upload.responseData)
+            serverMsg = try Midnight.jsonDecoder.decode(ServerMessage.self, from: upload.responseData)
         } catch {
             uploadError = error
             return

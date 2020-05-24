@@ -1,14 +1,14 @@
 //
 //  MessagePresenter.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-import TinodiosDB
+import MidnightiosDB
 
 protocol MessagePresentationLogic {
     func updateTitleBar(icon: UIImage?, title: String?, online: Bool)

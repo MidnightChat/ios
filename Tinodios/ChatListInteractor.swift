@@ -1,13 +1,13 @@
 //
 //  ChatListInteractor.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 protocol ChatListBusinessLogic: class {
     func loadAndPresentTopics()
@@ -39,14 +39,14 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
             }
         }
         override func onMetaSub(sub: Subscription<VCard, PrivateType>) {
-            if Tinode.topicTypeByName(name: sub.topic) == .p2p {
+            if Midnight.topicTypeByName(name: sub.topic) == .p2p {
                 ContactsManager.default.processSubscription(sub: sub)
             }
         }
         override func onMetaDesc(desc: Description<VCard, PrivateType>) {
             // Handle description for me topic:
             // add/update user info for ME.
-            if let uid = Cache.getTinode().myUid {
+            if let uid = Cache.getMidnight().myUid {
                 ContactsManager.default.processDescription(uid: uid, desc: desc)
             }
         }
@@ -58,7 +58,7 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
             // throw new UnsupportedOperationException();
         }
     }
-    private class ChatEventListener: UiTinodeEventListener {
+    private class ChatEventListener: UiMidnightEventListener {
         private weak var interactor: ChatListBusinessLogic?
         init(interactor: ChatListBusinessLogic?, connected: Bool) {
             super.init(connected: connected)
@@ -81,10 +81,10 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
     private var archivedTopics: [DefaultComTopic]?
     private var meListener: MeListener? = nil
     private var meTopic: DefaultMeTopic? = nil
-    private var tinodeEventListener: ChatEventListener? = nil
+    private var midnightEventListener: ChatEventListener? = nil
 
     func attachToMeTopic() {
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         guard meTopic == nil || !meTopic!.attached else {
             return
         }
@@ -92,10 +92,10 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
         UiUtils.attachToMeTopic(meListener: self.meListener)?.then(
             onSuccess: { [weak self] msg in
                 self?.loadAndPresentTopics()
-                self?.meTopic = tinode.getMeTopic()
+                self?.meTopic = midnight.getMeTopic()
                 return nil
             }, onFailure: { [weak self] err in
-                if let e = err as? TinodeError, case .serverResponseError(let code, _, _) = e {
+                if let e = err as? MidnightError, case .serverResponseError(let code, _, _) = e {
                     if code == 401 || code==403 || code == 404 {
                         self?.router?.routeToLogin()
                     }
@@ -114,25 +114,25 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
         }
         self.meListener?.interactor = self
         self.meTopic?.listener = meListener
-        let tinode = Cache.getTinode()
-        if self.tinodeEventListener == nil {
-            self.tinodeEventListener = ChatEventListener(
+        let midnight = Cache.getMidnight()
+        if self.midnightEventListener == nil {
+            self.midnightEventListener = ChatEventListener(
                 interactor: self,
-                connected: tinode.isConnected)
+                connected: midnight.isConnected)
         }
-        tinode.addListener(self.tinodeEventListener!)
+        midnight.addListener(self.midnightEventListener!)
     }
     func cleanup() {
         if self.meTopic?.listener === self.meListener {
             self.meTopic?.listener = nil
         }
-        let tinode = Cache.getTinode()
-        if let listener = self.tinodeEventListener {
-            tinode.removeListener(listener)
+        let midnight = Cache.getMidnight()
+        if let listener = self.midnightEventListener {
+            midnight.removeListener(listener)
         }
     }
     private func getTopics(archived: Bool) -> [DefaultComTopic]? {
-        return Cache.getTinode().getFilteredTopics(filter: {(topic: TopicProto) in
+        return Cache.getMidnight().getFilteredTopics(filter: {(topic: TopicProto) in
             return topic.topicType.matches(TopicType.user) && topic.isArchived == archived && topic.isJoiner
         })?.map {
             // Must succeed.
@@ -151,7 +151,7 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
     }
 
     func deleteTopic(_ name: String) {
-        let topic = Cache.getTinode().getTopic(topicName: name) as! DefaultComTopic
+        let topic = Cache.getMidnight().getTopic(topicName: name) as! DefaultComTopic
         topic.delete(hard: true).then(
             onSuccess: { [weak self] msg in
                 self?.loadAndPresentTopics()
@@ -165,7 +165,7 @@ class ChatListInteractor: ChatListBusinessLogic, ChatListDataStore {
     }
 
     func changeArchivedStatus(forTopic name: String, archived: Bool) {
-        let topic = Cache.getTinode().getTopic(topicName: name) as! DefaultComTopic
+        let topic = Cache.getMidnight().getTopic(topicName: name) as! DefaultComTopic
         topic.updateArchived(archived: archived)?.then(
             onSuccess: { [weak self] msg in
                 self?.loadAndPresentTopics()

@@ -12,13 +12,13 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:TinodiosDB.xcodeproj">
+      location = "group:/Users/aidenlow/midnight/ios/MidnightiosDB.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TinodeSDK.xcodeproj">
+      location = "group:/Users/aidenlow/midnight/ios/MidnightSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Tinodios.xcodeproj">
+      location = "group:/Users/aidenlow/midnight/ios/Midnight.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

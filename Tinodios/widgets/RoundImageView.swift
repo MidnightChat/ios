@@ -1,13 +1,13 @@
 //
 //  RoundImageView.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 // Implementation of a circular image view with either an image or letters
 
-import TinodeSDK
+import MidnightSDK
 import UIKit
 
 @IBDesignable class RoundImageView: UIImageView {
@@ -105,7 +105,7 @@ import UIKit
             self.backgroundColor = nil
         } else {
             if let id = id, !id.isEmpty {
-                switch Tinode.topicTypeByName(name: id) {
+                switch Midnight.topicTypeByName(name: id) {
                 case .p2p: iconType = .p2p
                 case .grp: iconType = .grp
                 default: break

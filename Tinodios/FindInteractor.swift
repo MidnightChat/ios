@@ -1,12 +1,12 @@
 //
 //  FindInteractor.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
+import MidnightSDK
 
 protocol FindBusinessLogic: class {
     var fndTopic: DefaultFndTopic? { get }
@@ -33,9 +33,9 @@ class FindInteractor: FindBusinessLogic {
         }
     }
 
-    static let kTinodeImProtocol = "Tinode"
+    static let kMidnightImProtocol = "Midnight"
     var presenter: FindPresentationLogic?
-    private var queue = DispatchQueue(label: "co.tinode.contacts")
+    private var queue = DispatchQueue(label: "co.midnight.contacts")
     // All known contacts from BaseDb's Users table.
     private var localContacts: [ContactHolder]?
     // Current search query (nil if none).
@@ -58,10 +58,10 @@ class FindInteractor: FindBusinessLogic {
         }
     }
     func attachToFndTopic() {
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         UiUtils.attachToFndTopic(fndListener: self.fndListener)?.then(
                 onSuccess: { [weak self] msg in
-                    self?.fndTopic = tinode.getOrCreateFndTopic()
+                    self?.fndTopic = midnight.getOrCreateFndTopic()
                     return nil
                 },
                 onFailure: { err in
@@ -102,7 +102,7 @@ class FindInteractor: FindBusinessLogic {
                     } :
                     self.localContacts!
             if changed {
-                self.fndTopic?.setMeta(meta: MsgSetMeta(desc: MetaSetDesc(pub: searchQuery != nil ? searchQuery! : Tinode.kNullValue, priv: nil), sub: nil, tags: nil, cred: nil))
+                self.fndTopic?.setMeta(meta: MsgSetMeta(desc: MetaSetDesc(pub: searchQuery != nil ? searchQuery! : Midnight.kNullValue, priv: nil), sub: nil, tags: nil, cred: nil))
             }
             self.remoteContacts?.removeAll()
             if let queryString = searchQuery, queryString.count >= UiUtils.kMinTagLength {
@@ -119,14 +119,14 @@ class FindInteractor: FindBusinessLogic {
         guard let topicName = remoteContact.uniqueId, let sub = remoteContact.sub else {
             return false
         }
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         var topic: DefaultComTopic?
-        if !tinode.isTopicTracked(topicName: topicName) {
-            topic = tinode.newTopic(for: topicName) as? DefaultComTopic
+        if !midnight.isTopicTracked(topicName: topicName) {
+            topic = midnight.newTopic(for: topicName) as? DefaultComTopic
             topic?.pub = sub.pub
             topic?.persist(true)
         } else {
-            topic = tinode.getTopic(topicName: topicName) as? DefaultComTopic
+            topic = midnight.getTopic(topicName: topicName) as? DefaultComTopic
         }
         guard let topicUnwrapped = topic else { return false }
         if topicUnwrapped.isP2PType {

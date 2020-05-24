@@ -2,12 +2,12 @@
 //  TopicDb.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import SQLite
-import TinodeSDK
+import MidnightSDK
 
 public class StoredTopic: Payload {
     var id: Int64? = nil
@@ -183,20 +183,20 @@ public class TopicDb {
         let topics = self.table.filter(self.accountId == accountId)
         return try? self.db.prepare(topics)
     }
-    func readOne(for tinode: Tinode?, withName topicName: String?) -> TopicProto? {
+    func readOne(for midnight: Midnight?, withName topicName: String?) -> TopicProto? {
         guard let accountId = baseDb.account?.id else {
             return nil
         }
         if let row = try? db.pluck(self.table.filter(self.accountId == accountId && self.topic == topicName)) {
-            return readOne(for: tinode, row: row)
+            return readOne(for: midnight, row: row)
         }
         return nil
     }
-    func readOne(for tinode: Tinode?, row: Row) -> TopicProto? {
+    func readOne(for midnight: Midnight?, row: Row) -> TopicProto? {
         guard let topicName = row[self.topic] else {
             return nil
         }
-        let t = Tinode.newTopic(withTinode: tinode, forTopic: topicName)
+        let t = Midnight.newTopic(withMidnight: midnight, forTopic: topicName)
         self.deserializeTopic(topic: t, row: row)
         return t
     }

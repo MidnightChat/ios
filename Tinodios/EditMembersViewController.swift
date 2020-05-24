@@ -1,12 +1,12 @@
 //
 //  EditMembersViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 public protocol EditMembersDelegate: class {
     // Asks for the UIDs and contact info of initially selected members

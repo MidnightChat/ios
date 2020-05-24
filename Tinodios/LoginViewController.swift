@@ -1,14 +1,14 @@
 //
 //  LoginViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
 import os
 import SwiftKeychainWrapper
-import TinodeSDK
+import MidnightSDK
 import SwiftWebSocket
 
 class LoginViewController: UIViewController {
@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordVisibility: [UIButton]!
     private var passwordVisible: Bool = false
 
-    static let kTokenKey = "co.tinode.token"
+    static let kTokenKey = "co.midnight.token"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,19 +128,19 @@ class LoginViewController: UIViewController {
 
         guard !userName.isEmpty && !password.isEmpty else { return }
 
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         UiUtils.toggleProgressOverlay(in: self, visible: true, title: NSLocalizedString("Logging in...", comment: "Login progress text"))
         do {
-            try tinode.connectDefault()?
+            try midnight.connectDefault()?
                 .thenApply({ pkt in
-                        return tinode.loginBasic(uname: userName, password: password)
+                        return midnight.loginBasic(uname: userName, password: password)
                     })
                 .then(
                     onSuccess: { [weak self] pkt in
-                        Cache.log.info("LoginVC - login successful for %@", tinode.myUid!)
-                        Utils.saveAuthToken(for: userName, token: tinode.authToken)
-                        if let token = tinode.authToken {
-                            tinode.setAutoLoginWithToken(token: token)
+                        Cache.log.info("LoginVC - login successful for %@", midnight.myUid!)
+                        Utils.saveAuthToken(for: userName, token: midnight.authToken)
+                        if let token = midnight.authToken {
+                            midnight.setAutoLoginWithToken(token: token)
                         }
                         if let ctrl = pkt?.ctrl, ctrl.code >= 300, ctrl.text.contains("validate credentials") {
                             DispatchQueue.main.async {
@@ -154,8 +154,8 @@ class LoginViewController: UIViewController {
                     }, onFailure: { err in
                         Cache.log.error("LoginVC - login failed: %@", err.localizedDescription)
                         var toastMsg: String
-                        if let tinodeErr = err as? TinodeError {
-                            toastMsg = "Tinode: \(tinodeErr.description)"
+                        if let midnightErr = err as? MidnightError {
+                            toastMsg = "Midnight: \(midnightErr.description)"
                         } else if let nwErr = err as? SwiftWebSocket.WebSocketError {
                             toastMsg = String(format: NSLocalizedString("Couldn't connect to server: %@", comment: "Error message"), nwErr.localizedDescription)
                         } else {
@@ -164,7 +164,7 @@ class LoginViewController: UIViewController {
                         DispatchQueue.main.async {
                             UiUtils.showToast(message: toastMsg)
                         }
-                        _ = tinode.logout()
+                        _ = midnight.logout()
                         return nil
                     }).thenFinally { [weak self] in
                         guard let loginVC = self else { return }
@@ -174,8 +174,8 @@ class LoginViewController: UIViewController {
                     }
             } catch {
                 UiUtils.toggleProgressOverlay(in: self, visible: false)
-                Cache.log.error("LoginVC - Failed to connect/login to Tinode: %@", error.localizedDescription)
-                _ = tinode.logout()
+                Cache.log.error("LoginVC - Failed to connect/login to Midnight: %@", error.localizedDescription)
+                _ = midnight.logout()
             }
     }
 }

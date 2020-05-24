@@ -20,8 +20,6 @@
 		0A35BA9E22836CCF00AA5E2F /* ContactsSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A35BA9D22836CCF00AA5E2F /* ContactsSynchronizer.swift */; };
 		0A35BAA02283A37500AA5E2F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A35BA9F2283A37500AA5E2F /* Utils.swift */; };
 		0A36776922B09C1900724873 /* EditMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36776822B09C1900724873 /* EditMembersViewController.swift */; };
-		0A431C032244A26200A837F7 /* TinodeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A431C022244A26200A837F7 /* TinodeSDK.framework */; };
-		0A431C042244A26200A837F7 /* TinodeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A431C022244A26200A837F7 /* TinodeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A4B11FC2373D6E400199310 /* TagsEditDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4B11FB2373D6E400199310 /* TagsEditDialogView.xib */; };
 		0A4B11FE2373DC1400199310 /* TagsEditDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B11FD2373DC1400199310 /* TagsEditDialogView.swift */; };
 		0A4E1D3022829C46006C0912 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E1D2F22829C46006C0912 /* ContactsManager.swift */; };
@@ -34,7 +32,6 @@
 		0A8D945822BEED3700DC154E /* AvatarWithOnlineIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8D945722BEED3700DC154E /* AvatarWithOnlineIndicator.xib */; };
 		0A8D945A22BEF08100DC154E /* AvatarWithOnlineIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D945922BEF08100DC154E /* AvatarWithOnlineIndicator.swift */; };
 		0A8D945C22BF5B7F00DC154E /* AvatarWithOnlineIndicator+TypingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D945B22BF5B7F00DC154E /* AvatarWithOnlineIndicator+TypingAnimation.swift */; };
-		0A910AFC2383A60500C95AD3 /* TinodiosDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACE9E7E23814157006BE575 /* TinodiosDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A95F4D4229BD95900AEF7D3 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95F4D3229BD95900AEF7D3 /* AccountSettingsViewController.swift */; };
 		0A9A39D523B02CF500C70FF7 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A39D423B02CF500C70FF7 /* CircularProgressView.swift */; };
 		0A9E7149237BCC8400C1D491 /* NewChatTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E7148237BCC8400C1D491 /* NewChatTabController.swift */; };
@@ -43,7 +40,7 @@
 		0ACB5F0E22097651008FE740 /* ChatListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB5F0D22097651008FE740 /* ChatListPresenter.swift */; };
 		0ACB5F1022097665008FE740 /* ChatListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB5F0F22097665008FE740 /* ChatListRouter.swift */; };
 		0ACE9E7523813A1D006BE575 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACE9E7423813A1D006BE575 /* NotificationService.swift */; };
-		0ACE9E7923813A1D006BE575 /* TinodiosNSExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ACE9E7223813A1D006BE575 /* TinodiosNSExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0ACE9E7923813A1D006BE575 /* MidnightNSExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ACE9E7223813A1D006BE575 /* MidnightNSExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0ACE9E7F23814157006BE575 /* TinodiosDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACE9E7E23814157006BE575 /* TinodiosDB.framework */; };
 		0AD5552A21C625BB0027FD16 /* ChatListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5552921C625BB0027FD16 /* ChatListInteractor.swift */; };
 		0ADDBC8B2249F617000BD00D /* ChatListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDBC8A2249F617000BD00D /* ChatListViewCell.swift */; };
@@ -52,7 +49,6 @@
 		0AE50D4822156A5B0021F7B7 /* FindPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE50D4722156A5B0021F7B7 /* FindPresenter.swift */; };
 		0AE7339C22C33FEF0089C8D8 /* ChatListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AE7339B22C33FEF0089C8D8 /* ChatListViewCell.xib */; };
 		0AEE8BEE226456080022EC3F /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE8BED226456080022EC3F /* UiUtils.swift */; };
-		58CBE6CE018029121E923407 /* Pods_Tinodios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B787A84CD010EF920890105 /* Pods_Tinodios.framework */; };
 		7DDADC5221D5C219009733B5 /* ValidatedCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDADC5121D5C219009733B5 /* ValidatedCredential.swift */; };
 		7DDADC5421D5C2E6009733B5 /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDADC5321D5C2E6009733B5 /* CredentialsViewController.swift */; };
 		B008593C22741B8A002C5168 /* AttributedStringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008593B22741B89002C5168 /* AttributedStringFormatter.swift */; };
@@ -85,6 +81,12 @@
 		B0DF032F2282FF46000F9492 /* SendMessageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DF032E2282FF46000F9492 /* SendMessageBar.swift */; };
 		B0DF03312283FFD8000F9492 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DF03302283FFD8000F9492 /* PlaceholderTextView.swift */; };
 		B0F98C8322E381C300444121 /* MessageMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F98C8222E381C300444121 /* MessageMenuItem.swift */; };
+		FA346482247AC7B400300B11 /* MidnightSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA346481247AC7B400300B11 /* MidnightSDK.framework */; };
+		FA346483247AC7B400300B11 /* MidnightSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA346481247AC7B400300B11 /* MidnightSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA346485247AC7BE00300B11 /* MidnightiosDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA346484247AC7BE00300B11 /* MidnightiosDB.framework */; };
+		FA346486247AC7BE00300B11 /* MidnightiosDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA346484247AC7BE00300B11 /* MidnightiosDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA346488247AC7CB00300B11 /* Pods_Midnightios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA346487247AC7CB00300B11 /* Pods_Midnightios.framework */; };
+		FA346489247AC7CB00300B11 /* Pods_Midnightios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA346487247AC7CB00300B11 /* Pods_Midnightios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA37AD24238B0D6F00301261 /* KeyboardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37AD23238B0D6F00301261 /* KeyboardInfo.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,8 +107,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A910AFC2383A60500C95AD3 /* TinodiosDB.framework in Embed Frameworks */,
-				0A431C042244A26200A837F7 /* TinodeSDK.framework in Embed Frameworks */,
+				FA346486247AC7BE00300B11 /* MidnightiosDB.framework in Embed Frameworks */,
+				FA346489247AC7CB00300B11 /* Pods_Midnightios.framework in Embed Frameworks */,
+				FA346483247AC7B400300B11 /* MidnightSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,7 +120,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0ACE9E7923813A1D006BE575 /* TinodiosNSExtension.appex in Embed App Extensions */,
+				0ACE9E7923813A1D006BE575 /* MidnightNSExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,7 +130,7 @@
 /* Begin PBXFileReference section */
 		0A0016E621E7236900088188 /* MessageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInteractor.swift; sourceTree = "<group>"; };
 		0A0016E821E736CD00088188 /* MessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePresenter.swift; sourceTree = "<group>"; };
-		0A0380D421B3CC8100A3FA0E /* Tinodios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinodios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A0380D421B3CC8100A3FA0E /* Midnight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Midnight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0380D721B3CC8100A3FA0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A0380D921B3CC8100A3FA0E /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		0A0380DC21B3CC8100A3FA0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,7 +163,7 @@
 		0AC33D022293C7A00060D263 /* NewGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		0ACB5F0D22097651008FE740 /* ChatListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListPresenter.swift; sourceTree = "<group>"; };
 		0ACB5F0F22097665008FE740 /* ChatListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRouter.swift; sourceTree = "<group>"; };
-		0ACE9E7223813A1D006BE575 /* TinodiosNSExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TinodiosNSExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ACE9E7223813A1D006BE575 /* MidnightNSExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MidnightNSExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ACE9E7423813A1D006BE575 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		0ACE9E7623813A1D006BE575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ACE9E7E23814157006BE575 /* TinodiosDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TinodiosDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +217,9 @@
 		B0DF03302283FFD8000F9492 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		B0F98C8222E381C300444121 /* MessageMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMenuItem.swift; sourceTree = "<group>"; };
 		B36DC000235D850000724348 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		FA346481247AC7B400300B11 /* MidnightSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MidnightSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA346484247AC7BE00300B11 /* MidnightiosDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MidnightiosDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA346487247AC7CB00300B11 /* Pods_Midnightios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Midnightios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA37AD23238B0D6F00301261 /* KeyboardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,8 +228,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A431C032244A26200A837F7 /* TinodeSDK.framework in Frameworks */,
-				58CBE6CE018029121E923407 /* Pods_Tinodios.framework in Frameworks */,
+				FA346485247AC7BE00300B11 /* MidnightiosDB.framework in Frameworks */,
+				FA346488247AC7CB00300B11 /* Pods_Midnightios.framework in Frameworks */,
+				FA346482247AC7B400300B11 /* MidnightSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +264,8 @@
 		0A0380D521B3CC8100A3FA0E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A0380D421B3CC8100A3FA0E /* Tinodios.app */,
-				0ACE9E7223813A1D006BE575 /* TinodiosNSExtension.appex */,
+				0A0380D421B3CC8100A3FA0E /* Midnight.app */,
+				0ACE9E7223813A1D006BE575 /* MidnightNSExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -345,6 +352,9 @@
 		4805E89223B1ECF4F9F439D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA346487247AC7CB00300B11 /* Pods_Midnightios.framework */,
+				FA346484247AC7BE00300B11 /* MidnightiosDB.framework */,
+				FA346481247AC7B400300B11 /* MidnightSDK.framework */,
 				0ACE9E7E23814157006BE575 /* TinodiosDB.framework */,
 				3B787A84CD010EF920890105 /* Pods_Tinodios.framework */,
 			);
@@ -397,9 +407,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A0380D321B3CC8100A3FA0E /* Tinodios */ = {
+		0A0380D321B3CC8100A3FA0E /* Midnight */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A0380E621B3CC8200A3FA0E /* Build configuration list for PBXNativeTarget "Tinodios" */;
+			buildConfigurationList = 0A0380E621B3CC8200A3FA0E /* Build configuration list for PBXNativeTarget "Midnight" */;
 			buildPhases = (
 				46966AD24309BE3586965D61 /* [CP] Check Pods Manifest.lock */,
 				0A0380D021B3CC8100A3FA0E /* Sources */,
@@ -417,14 +427,14 @@
 			dependencies = (
 				0ACE9E7823813A1D006BE575 /* PBXTargetDependency */,
 			);
-			name = Tinodios;
+			name = Midnight;
 			productName = ios;
-			productReference = 0A0380D421B3CC8100A3FA0E /* Tinodios.app */;
+			productReference = 0A0380D421B3CC8100A3FA0E /* Midnight.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0ACE9E7123813A1D006BE575 /* TinodiosNSExtension */ = {
+		0ACE9E7123813A1D006BE575 /* MidnightNSExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0ACE9E7D23813A1D006BE575 /* Build configuration list for PBXNativeTarget "TinodiosNSExtension" */;
+			buildConfigurationList = 0ACE9E7D23813A1D006BE575 /* Build configuration list for PBXNativeTarget "MidnightNSExtension" */;
 			buildPhases = (
 				0ACE9E6E23813A1D006BE575 /* Sources */,
 				0ACE9E6F23813A1D006BE575 /* Frameworks */,
@@ -435,9 +445,9 @@
 			);
 			dependencies = (
 			);
-			name = TinodiosNSExtension;
+			name = MidnightNSExtension;
 			productName = TinodiosNSExtension;
-			productReference = 0ACE9E7223813A1D006BE575 /* TinodiosNSExtension.appex */;
+			productReference = 0ACE9E7223813A1D006BE575 /* MidnightNSExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -448,7 +458,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = Tinode;
+				ORGANIZATIONNAME = Midnight;
 				TargetAttributes = {
 					0A0380D321B3CC8100A3FA0E = {
 						CreatedOnToolsVersion = 10.1;
@@ -458,7 +468,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A0380CF21B3CC8100A3FA0E /* Build configuration list for PBXProject "Tinodios" */;
+			buildConfigurationList = 0A0380CF21B3CC8100A3FA0E /* Build configuration list for PBXProject "Midnight" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -472,8 +482,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A0380D321B3CC8100A3FA0E /* Tinodios */,
-				0ACE9E7123813A1D006BE575 /* TinodiosNSExtension */,
+				0A0380D321B3CC8100A3FA0E /* Midnight */,
+				0ACE9E7123813A1D006BE575 /* MidnightNSExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -716,7 +726,7 @@
 /* Begin PBXTargetDependency section */
 		0ACE9E7823813A1D006BE575 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0ACE9E7123813A1D006BE575 /* TinodiosNSExtension */;
+			target = 0ACE9E7123813A1D006BE575 /* MidnightNSExtension */;
 			targetProxy = 0ACE9E7723813A1D006BE575 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -884,14 +894,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tinodios/Info.plist;
+				INFOPLIST_FILE = Midnightios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.tinodios;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.midnightios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -909,14 +919,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tinodios/Info.plist;
+				INFOPLIST_FILE = Midnightios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.tinode.tinodios;
+				PRODUCT_BUNDLE_IDENTIFIER = co.midnight.midnightios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -980,7 +990,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A0380CF21B3CC8100A3FA0E /* Build configuration list for PBXProject "Tinodios" */ = {
+		0A0380CF21B3CC8100A3FA0E /* Build configuration list for PBXProject "Midnight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A0380E421B3CC8200A3FA0E /* Debug */,
@@ -989,7 +999,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		0A0380E621B3CC8200A3FA0E /* Build configuration list for PBXNativeTarget "Tinodios" */ = {
+		0A0380E621B3CC8200A3FA0E /* Build configuration list for PBXNativeTarget "Midnight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A0380E721B3CC8200A3FA0E /* Debug */,
@@ -998,7 +1008,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		0ACE9E7D23813A1D006BE575 /* Build configuration list for PBXNativeTarget "TinodiosNSExtension" */ = {
+		0ACE9E7D23813A1D006BE575 /* Build configuration list for PBXNativeTarget "MidnightNSExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0ACE9E7B23813A1D006BE575 /* Debug */,

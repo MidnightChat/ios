@@ -1,16 +1,16 @@
 //
 //  UiUtils.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Firebase
 import Foundation
-import TinodiosDB
-import TinodeSDK
+import MidnightiosDB
+import MidnightSDK
 
-class UiTinodeEventListener : TinodeEventListener {
+class UiMidnightEventListener : MidnightEventListener {
     private var connected: Bool = false
 
     init(connected: Bool) {
@@ -82,7 +82,7 @@ class UiUtils {
               if let error = error {
                 Cache.log.debug("Error fetching remote Firebase instance ID: %@", error.localizedDescription)
               } else if let result = result {
-                Cache.getTinode().setDeviceToken(token: result.token)
+                Cache.getMidnight().setDeviceToken(token: result.token)
               }
             }
             return
@@ -103,10 +103,10 @@ class UiUtils {
     }
 
     public static func attachToMeTopic(meListener: DefaultMeTopic.Listener?) -> PromisedReply<ServerMessage>? {
-        let tinode = Cache.getTinode()
-        var me = tinode.getMeTopic()
+        let midnight = Cache.getMidnight()
+        var me = midnight.getMeTopic()
         if me == nil  {
-            me = DefaultMeTopic(tinode: tinode, l: meListener)
+            me = DefaultMeTopic(midnight: midnight, l: meListener)
         } else {
             me!.listener = meListener
         }
@@ -114,14 +114,14 @@ class UiUtils {
         return me!.subscribe(set: nil, get: get)
             .thenCatch({ err in
                 Cache.log.error("ME topic subscription error: %@", err.localizedDescription)
-                if let e = err as? TinodeError {
-                    if case TinodeError.serverResponseError(let code, let text, _) = e {
+                if let e = err as? MidnightError {
+                    if case MidnightError.serverResponseError(let code, let text, _) = e {
                         switch code {
                         case 404:
                             UiUtils.logoutAndRouteToLoginVC()
                         case 502:
                             if text == "cluster unreachable" {
-                                Cache.getTinode().reconnectNow(interactively: false, reset: true)
+                                Cache.getMidnight().reconnectNow(interactively: false, reset: true)
                             }
                         default:
                             break
@@ -132,8 +132,8 @@ class UiUtils {
             })
     }
     public static func attachToFndTopic(fndListener: DefaultFndTopic.Listener?) -> PromisedReply<ServerMessage>? {
-        let tinode = Cache.getTinode()
-        let fnd = tinode.getOrCreateFndTopic()
+        let midnight = Cache.getMidnight()
+        let fnd = midnight.getOrCreateFndTopic()
         fnd.listener = fndListener
         //if fnd.
         return !fnd.attached ?
@@ -351,7 +351,7 @@ class UiUtils {
     @discardableResult
     public static func ToastFailureHandler(err: Error) -> PromisedReply<ServerMessage>? {
         DispatchQueue.main.async {
-            if let e = err as? TinodeError, case .notConnected = e {
+            if let e = err as? MidnightError, case .notConnected = e {
                 UiUtils.showToast(message: NSLocalizedString("You are offline.", comment: "Toast notification"))
             } else {
                 UiUtils.showToast(message: String(format: NSLocalizedString("Action failed: %@", comment: "Toast notification"), err.localizedDescription))

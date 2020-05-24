@@ -1,8 +1,8 @@
 //
 //  TagsEditDialogView.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -11,16 +11,16 @@ import UIKit
 class TagsEditDialogViewController: UIViewController {
     private static let kButtonBorderColor = UIColor(fromHexCode: 0xFFE0E0E0)
 
-    public typealias CompletionHandler = ((_ newTags: [TinodeTag]) -> ())
+    public typealias CompletionHandler = ((_ newTags: [MidnightTag]) -> ())
 
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var tagsEditView: TagsEditView!
-    private var initialTags: [TinodeTag] = []
+    private var initialTags: [MidnightTag] = []
     public var completionHandler: CompletionHandler?
 
-    init(with tags: [TinodeTag]) {
+    init(with tags: [MidnightTag]) {
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext

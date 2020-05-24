@@ -2,7 +2,7 @@
 //  MessageTypes.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -86,10 +86,10 @@ public class MsgServerMeta: Decodable {
         del = try? container.decode(DelValues.self, forKey: .del)
         tags = try? container.decode(Array<String>.self, forKey: .tags)
         cred = try? container.decode(Array<Credential>.self, forKey: .cred)
-        if topic == Tinode.kTopicMe {
+        if topic == Midnight.kTopicMe {
             desc = try? container.decode(DefaultDescription.self, forKey: .desc)
             sub = try? container.decode(Array<DefaultSubscription>.self, forKey: .sub)
-        } else if topic == Tinode.kTopicFnd {
+        } else if topic == Midnight.kTopicFnd {
             desc = try? container.decode(FndDescription.self, forKey: .desc)
             sub = try? container.decode(Array<FndSubscription>.self, forKey: .sub)
         } else {

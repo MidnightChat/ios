@@ -2,7 +2,7 @@
 //  ClientMessages.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -499,7 +499,7 @@ public class MsgClientDel: Encodable {
 
     /// Delete credential
     convenience init(id: String?, cred: Credential) {
-        self.init(id: id, topic: Tinode.kTopicMe, what: MsgClientDel.kStrCred,
+        self.init(id: id, topic: Midnight.kTopicMe, what: MsgClientDel.kStrCred,
                   ranges: nil, user: nil, cred: cred, hard: nil)
     }
 

@@ -1,8 +1,8 @@
 //
 //  ResetPasswordViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
@@ -26,9 +26,9 @@ class ResetPasswordViewController : UIViewController {
         if self.isMovingFromParent {
             // If the user's logged in and is voluntarily leaving the ResetPassword VC
             // by hitting the Back button.
-            let tinode = Cache.getTinode()
-            if tinode.isConnectionAuthenticated || tinode.myUid != nil {
-                tinode.logout()
+            let midnight = Cache.getMidnight()
+            if midnight.isConnectionAuthenticated || midnight.myUid != nil {
+                midnight.logout()
             }
         }
     }
@@ -69,12 +69,12 @@ class ResetPasswordViewController : UIViewController {
         default: return
         }
 
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
         UiUtils.toggleProgressOverlay(in: self, visible: true, title: NSLocalizedString("Requesting...", comment: "Progress overlay"))
         do {
-            try tinode.connectDefault()?
+            try midnight.connectDefault()?
                 .thenApply({ _ in
-                    return tinode.requestResetPassword(method: credential.methodName(), newValue: normalized)
+                    return midnight.requestResetPassword(method: credential.methodName(), newValue: normalized)
                 })
                 .thenApply({ _ in
                     DispatchQueue.main.async { UiUtils.showToast(message: NSLocalizedString("Message with instructions sent to the provided address.", comment: "Toast info")) }

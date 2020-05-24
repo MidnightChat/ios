@@ -1,8 +1,8 @@
 //
 //  TagsEditView.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 //  Based on https://github.com/whitesmith/WSTagsField.
 
@@ -24,12 +24,12 @@ internal struct Constants {
     internal static let kTagEditViewMarginLayouts = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
 }
 
-public typealias TinodeTag = String
+public typealias MidnightTag = String
 
 public class TagView: UIView {
     fileprivate let textLabel = UILabel()
 
-    public var displayTag: TinodeTag = ""
+    public var displayTag: MidnightTag = ""
 
     internal var onDidRequestDelete: ((_ tagView: TagView, _ replacementText: String?) -> Void)?
     internal var onDidRequestSelection: ((_ tagView: TagView) -> Void)?
@@ -47,7 +47,7 @@ public class TagView: UIView {
         }
     }
 
-    public init(tag: TinodeTag, usingFont font: UIFont?) {
+    public init(tag: MidnightTag, usingFont font: UIFont?) {
         super.init(frame: CGRect.zero)
         self.backgroundColor = tintColor
         self.layer.cornerRadius = Constants.kTagCornerRadius
@@ -229,7 +229,7 @@ public class TagsEditView: UIScrollView {
     public var onShouldAcceptTag: ((TagsEditView) -> Bool)?
 
     /// Called before a tag is added to the tag list. Here you return false to discard tags you do not want to allow.
-    public var onValidateTag: ((TinodeTag) -> Bool)?
+    public var onValidateTag: ((MidnightTag) -> Bool)?
 
     /**
      * Called when the user attempts to press the Return key with text partially typed.
@@ -307,7 +307,7 @@ public class TagsEditView: UIScrollView {
         self.textField.reloadInputViews()
     }
 
-    public func addTag(_ tag: TinodeTag) {
+    public func addTag(_ tag: MidnightTag) {
         guard self.onValidateTag?(tag) ?? true else {
             return
         }
@@ -357,7 +357,7 @@ public class TagsEditView: UIScrollView {
         repositionViews()
     }
 
-    public func addTags(_ tags: [TinodeTag]) {
+    public func addTags(_ tags: [MidnightTag]) {
         tags.forEach { addTag($0) }
     }
 
@@ -373,10 +373,10 @@ public class TagsEditView: UIScrollView {
     }
 
     @discardableResult
-    public func tokenizeTextFieldText() -> TinodeTag? {
+    public func tokenizeTextFieldText() -> MidnightTag? {
         let text = self.textField.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? ""
         if !text.isEmpty && (onVerifyTag?(self, text) ?? true) {
-            let tag = text as TinodeTag
+            let tag = text as MidnightTag
             addTag(tag)
             self.textField.text = ""
             return tag
@@ -603,7 +603,7 @@ extension TagsEditView: UITextFieldDelegate {
 }
 
 extension TagsEditView {
-    public var tags: [TinodeTag] {
+    public var tags: [MidnightTag] {
         get {
             return self.tagViews.map { $0.displayTag }
         }

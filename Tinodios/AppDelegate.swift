@@ -2,14 +2,14 @@
 //  AppDelegate.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Firebase
 import Network
 import UIKit
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,10 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let reachability = NWPathMonitor()
                 reachability.start(queue: DispatchQueue.global(qos: .background))
                 reachability.pathUpdateHandler = { path in
-                    let tinode = Cache.getTinode()
-                    if path.status == .satisfied, !tinode.isConnected {
+                    let midnight = Cache.getMidnight()
+                    if path.status == .satisfied, !midnight.isConnected {
                         Cache.log.info("NWPathMonitor: network available - reconnecting")
-                        tinode.reconnectNow(interactively: false, reset: false)
+                        midnight.reconnectNow(interactively: false, reset: false)
                     }
                 }
                 self.nwReachability = reachability
@@ -87,22 +87,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // if the last received message was prior to |seq|.
     @discardableResult
     private func fetchData(for topicName: String, seq: Int) -> UIBackgroundFetchResult {
-        let tinode = Cache.getTinode()
-        guard tinode.isConnectionAuthenticated || Utils.connectAndLoginSync() else {
+        let midnight = Cache.getMidnight()
+        guard midnight.isConnectionAuthenticated || Utils.connectAndLoginSync() else {
             return .failed
         }
         var topic: DefaultComTopic
         var builder: DefaultComTopic.MetaGetBuilder
-        if !tinode.isTopicTracked(topicName: topicName) {
+        if !midnight.isTopicTracked(topicName: topicName) {
             // New topic. Create it.
-            guard let t = tinode.newTopic(for: topicName) as? DefaultComTopic else {
+            guard let t = midnight.newTopic(for: topicName) as? DefaultComTopic else {
                 return .failed
             }
             topic = t
             builder = topic.metaGetBuilder().withDesc().withSub()
         } else {
             // Existing topic.
-            guard let t = tinode.getTopic(topicName: topicName) as? DefaultComTopic else { return .failed }
+            guard let t = midnight.getTopic(topicName: topicName) as? DefaultComTopic else { return .failed }
             topic = t
             builder = topic.metaGetBuilder()
         }
@@ -125,16 +125,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // (and saves the description locally).
     @discardableResult
     private func fetchDesc(for topicName: String) -> UIBackgroundFetchResult {
-        let tinode = Cache.getTinode()
-        guard tinode.isConnectionAuthenticated || Utils.connectAndLoginSync() else {
+        let midnight = Cache.getMidnight()
+        guard midnight.isConnectionAuthenticated || Utils.connectAndLoginSync() else {
             return .failed
         }
         // If we have topic data, we are done.
-        guard !tinode.isTopicTracked(topicName: topicName) else {
+        guard !midnight.isTopicTracked(topicName: topicName) else {
             return .noData
         }
         do {
-            if let msg = try tinode.getMeta(topic: topicName, query: MsgGetMeta.desc()).getResult(),
+            if let msg = try midnight.getMeta(topic: topicName, query: MsgGetMeta.desc()).getResult(),
                 (msg.ctrl?.code ?? 500) < 300 {
                 return .newData
             }
@@ -184,7 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         // TODO: support 3rd party urls.
-        if (components.host?.hasSuffix("tinode.co") ?? false) {
+        if (components.host?.hasSuffix("midnight.co") ?? false) {
             // Start the app.
             return true
         }
@@ -214,7 +214,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         defer { completionHandler() }
         guard let topicName = userInfo["topic"] as? String, !topicName.isEmpty else { return }
-        if Cache.getTinode().isConnectionAuthenticated {
+        if Cache.getMidnight().isConnectionAuthenticated {
             UiUtils.routeToMessageVC(forTopic: topicName)
             return
         }
@@ -234,6 +234,6 @@ extension AppDelegate: MessagingDelegate {
     }
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         // Update token. Send to the app server.
-        Cache.getTinode().setDeviceToken(token: fcmToken)
+        Cache.getMidnight().setDeviceToken(token: fcmToken)
     }
 }

@@ -2,7 +2,7 @@
 //  Subscription.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -188,11 +188,11 @@ public class Subscription<SP: Codable, SR: Codable>: SubscriptionProto {
     }
     public func serializePub() -> String? {
         guard let p = pub else { return nil }
-        return Tinode.serializeObject(p)
+        return Midnight.serializeObject(p)
     }
     @discardableResult
     public func deserializePub(from data: String?) -> Bool {
-        if let p: SP = Tinode.deserializeObject(from: data) {
+        if let p: SP = Midnight.deserializeObject(from: data) {
             self.pub = p
             return true
         }
@@ -200,11 +200,11 @@ public class Subscription<SP: Codable, SR: Codable>: SubscriptionProto {
     }
     public func serializePriv() -> String? {
         guard let p = priv else { return nil }
-        return Tinode.serializeObject(p)
+        return Midnight.serializeObject(p)
     }
     @discardableResult
     public func deserializePriv(from data: String?) -> Bool {
-        if let p: SR = Tinode.deserializeObject(from: data) {
+        if let p: SR = Midnight.deserializeObject(from: data) {
             self.priv = p
             return true
         }

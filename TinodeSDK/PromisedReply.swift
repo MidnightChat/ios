@@ -2,7 +2,7 @@
 //  PromisedReply.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -70,7 +70,7 @@ public class PromisedReply<Value> {
     private var failureHandler: FailureHandler = nil
     private var nextPromise: PromisedReply<Value>?
     private var countDownLatch: CountDownLatch?
-    private var queue = DispatchQueue(label: "co.tinode.promise")
+    private var queue = DispatchQueue(label: "co.midnight.promise")
     private(set) var creationTimestamp: Date = Date()
     var isResolved: Bool {
         get {

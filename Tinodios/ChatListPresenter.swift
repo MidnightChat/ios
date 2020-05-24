@@ -1,12 +1,12 @@
 //
 //  ChatListPresenter.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
+import MidnightSDK
 
 protocol ChatListPresentationLogic {
     func presentTopics(_ topics: [DefaultComTopic], archivedTopics: [DefaultComTopic]?)

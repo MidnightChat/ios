@@ -1,0 +1,6 @@
+framework module Pods_Midnightios {
+  umbrella header "Pods-Midnightios-umbrella.h"
+
+  export *
+  module * { export * }
+}

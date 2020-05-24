@@ -1,13 +1,13 @@
 //
 //  ContactsSynchronizer.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import Contacts
-import TinodeSDK
+import MidnightSDK
 
 class ContactsSynchronizer {
     private class ContactHolder2 {
@@ -19,7 +19,7 @@ class ContactsSynchronizer {
 
         public static let kPhoneLabel = "tel:"
         public static let kEmailLabel = "email:"
-        public static let kTinodeLabel = "tinode:"
+        public static let kMidnightLabel = "midnight:"
 
         func toString() -> String {
             var vals = [String]()
@@ -30,14 +30,14 @@ class ContactsSynchronizer {
                 vals += emails.map { ContactHolder2.kEmailLabel + $0 }
             }
             if let ims = self.ims {
-                vals += ims.map { ContactHolder2.kTinodeLabel + $0 }
+                vals += ims.map { ContactHolder2.kMidnightLabel + $0 }
             }
             return vals.joined(separator: ",")
         }
     }
     public static let `default` = ContactsSynchronizer()
     private let store = CNContactStore()
-    private let queue = DispatchQueue(label: "co.tinode.sync")
+    private let queue = DispatchQueue(label: "co.midnight.sync")
     public var authStatus: CNAuthorizationStatus = .notDetermined {
         didSet {
             if self.authStatus == .authorized {
@@ -48,17 +48,17 @@ class ContactsSynchronizer {
             }
         }
     }
-    private static let kTinodeServerSyncMarker = "tinodeServerSyncMarker"
+    private static let kMidnightServerSyncMarker = "midnightServerSyncMarker"
     private var serverSyncMarker: Date? {
         get {
             let userDefaults = UserDefaults.standard
             return userDefaults.object(
-                forKey: ContactsSynchronizer.kTinodeServerSyncMarker) as? Date
+                forKey: ContactsSynchronizer.kMidnightServerSyncMarker) as? Date
         }
         set {
             if let v = newValue {
                 UserDefaults.standard.set(
-                    v, forKey: ContactsSynchronizer.kTinodeServerSyncMarker)
+                    v, forKey: ContactsSynchronizer.kMidnightServerSyncMarker)
             }
         }
     }
@@ -92,7 +92,7 @@ class ContactsSynchronizer {
             contactHolder.emails = systemContact.emailAddresses.map { String($0.value) }
             contactHolder.phones = systemContact.phoneNumbers.map { $0.value.naiveE164 }
             contactHolder.ims = systemContact.instantMessageAddresses
-                .filter { $0.value.service == FindInteractor.kTinodeImProtocol  }
+                .filter { $0.value.service == FindInteractor.kMidnightImProtocol  }
                 .map { $0.value.username }
             return contactHolder
         }
@@ -130,25 +130,25 @@ class ContactsSynchronizer {
             Cache.log.info("ContactsSynchronizer - starting sync.")
             let contacts: String = contactsToQueryString(contacts: contacts)
             var lastSyncMarker = self.serverSyncMarker
-            let tinode = Cache.getTinode()
+            let midnight = Cache.getMidnight()
             do {
-                tinode.setAutoLoginWithToken(token: token)
-                _ = try tinode.connectDefault()?.getResult()
+                midnight.setAutoLoginWithToken(token: token)
+                _ = try midnight.connectDefault()?.getResult()
 
-                _ = try tinode.loginToken(token: token, creds: nil).getResult()
+                _ = try midnight.loginToken(token: token, creds: nil).getResult()
                 // Generic params don't matter.
-                _ = try tinode.subscribe(to: Tinode.kTopicFnd, set: MsgSetMeta<Int, Int>?(nil), get: nil, background: false).getResult()
+                _ = try midnight.subscribe(to: Midnight.kTopicFnd, set: MsgSetMeta<Int, Int>?(nil), get: nil, background: false).getResult()
                 //let q: Int? = nil
                 let metaDesc: MetaSetDesc<Int, String> = MetaSetDesc(pub: nil, priv: contacts)
                 let setMeta: MsgSetMeta<Int, String> = MsgSetMeta<Int, String>(desc: metaDesc, sub: nil, tags: nil, cred: nil)
-                _ = try tinode.setMeta(for: Tinode.kTopicFnd, meta: setMeta).getResult()
+                _ = try midnight.setMeta(for: Midnight.kTopicFnd, meta: setMeta).getResult()
                 let meta = MsgGetMeta(desc: nil, sub: MetaGetSub(user: nil, ims: lastSyncMarker, limit: nil), data: nil, del: nil, tags: false, cred: false)
-                let future = tinode.getMeta(topic: Tinode.kTopicFnd, query: meta)
+                let future = midnight.getMeta(topic: Midnight.kTopicFnd, query: meta)
                 if try future.waitResult() {
                     let pkt = try! future.getResult()
                     guard let subs = pkt?.meta?.sub else { return }
                     for sub in subs {
-                        if Tinode.topicTypeByName(name: sub.user) == .p2p {
+                        if Midnight.topicTypeByName(name: sub.user) == .p2p {
                             if (lastSyncMarker ?? Date.distantPast) < (sub.updated ?? Date.distantPast) {
                                 lastSyncMarker = sub.updated
                             }

@@ -1,12 +1,12 @@
 //
 //  CredentialsViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 class CredentialsViewController : UIViewController {
 
@@ -30,9 +30,9 @@ class CredentialsViewController : UIViewController {
         if self.isMovingFromParent {
             // If the user's logged in and is voluntarily leaving the verification VC
             // by hitting the Back button.
-            let tinode = Cache.getTinode()
-            if tinode.isConnectionAuthenticated || tinode.myUid != nil {
-                tinode.logout()
+            let midnight = Cache.getMidnight()
+            if midnight.isConnectionAuthenticated || midnight.myUid != nil {
+                midnight.logout()
             }
         }
     }
@@ -45,9 +45,9 @@ class CredentialsViewController : UIViewController {
             return
         }
 
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
 
-        guard let token = tinode.authToken else {
+        guard let token = midnight.authToken else {
             self.dismiss(animated: true, completion: nil)
             return
         }
@@ -56,15 +56,15 @@ class CredentialsViewController : UIViewController {
         var creds = [Credential]()
         creds.append(c)
 
-        tinode.loginToken(token: token, creds: creds)
+        midnight.loginToken(token: token, creds: creds)
             .thenApply({ msg in
                 if let ctrl = msg?.ctrl, ctrl.code >= 300 {
                     DispatchQueue.main.async {
                         UiUtils.showToast(message: String(format: NSLocalizedString("Verification failure: %d %@", comment: "Error message"), ctrl.code, ctrl.text))
                     }
                 } else {
-                    if let token = tinode.authToken {
-                        tinode.setAutoLoginWithToken(token: token)
+                    if let token = midnight.authToken {
+                        midnight.setAutoLoginWithToken(token: token)
                     }
                     UiUtils.routeToChatListVC()
                 }

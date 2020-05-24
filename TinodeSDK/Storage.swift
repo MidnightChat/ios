@@ -2,7 +2,7 @@
 //  Storage.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -26,7 +26,7 @@ public protocol Message {
     // Get current message unique ID (database ID).
     var msgId: Int64 { get }
 
-    // Get Tinode seq Id of the message (different from database ID).
+    // Get Midnight seq Id of the message (different from database ID).
     var seqId: Int { get }
 
     var isDraft: Bool { get }
@@ -68,9 +68,9 @@ public protocol Storage: class {
     var isReady: Bool { get }
 
     // Fetch all topics.
-    func topicGetAll(from tinode: Tinode?) -> [TopicProto]?
+    func topicGetAll(from midnight: Midnight?) -> [TopicProto]?
     // Retrieve a topic by name.
-    func topicGet(from tinode: Tinode?, withName name: String?) -> TopicProto?
+    func topicGet(from midnight: Midnight?, withName name: String?) -> TopicProto?
     // Add new topic.
     @discardableResult
     func topicAdd(topic: TopicProto) -> Int64

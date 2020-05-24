@@ -2,12 +2,12 @@
 //  UserDb.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
 import SQLite
-import TinodeSDK
+import MidnightSDK
 
 public class StoredUser: Payload {
     let id: Int64?

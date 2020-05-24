@@ -2,7 +2,7 @@
 //  User.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -19,10 +19,10 @@ public protocol UserProto: class {
 extension UserProto {
     public static func createFromPublicData(uid: String?, updated: Date?, data: String?) -> UserProto? {
         guard let data = data else { return nil }
-        if let p: VCard = Tinode.deserializeObject(from: data) {
+        if let p: VCard = Midnight.deserializeObject(from: data) {
             return User(uid: uid, updated: updated, pub: p)
         }
-        if let p: String = Tinode.deserializeObject(from: data) {
+        if let p: String = Midnight.deserializeObject(from: data) {
             return User(uid: uid, updated: updated, pub: p)
         }
         return nil
@@ -61,7 +61,7 @@ public class User<P: Codable>: UserProto {
     }
     public func serializePub() -> String? {
         guard let p = pub else { return nil }
-        return Tinode.serializeObject(p)
+        return Midnight.serializeObject(p)
     }
     func merge(from user: User<P>) -> Bool {
         var changed = false

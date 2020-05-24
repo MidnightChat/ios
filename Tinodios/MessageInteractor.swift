@@ -1,13 +1,13 @@
 //
 //  MessageInteractor.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 protocol MessageBusinessLogic: class {
     @discardableResult
@@ -38,7 +38,7 @@ protocol MessageDataStore {
 } 
 
 class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, MessageDataStore {
-    class MessageEventListener: UiTinodeEventListener {
+    class MessageEventListener: UiMidnightEventListener {
         private weak var interactor: MessageBusinessLogic?
         init(interactor: MessageBusinessLogic?, connected: Bool) {
             super.init(connected: connected)
@@ -57,8 +57,8 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
     var topic: DefaultComTopic?
     var presenter: MessagePresentationLogic?
     var messages: [StoredMessage] = []
-    private var messageInteractorQueue = DispatchQueue(label: "co.tinode.messageinteractor")
-    private var tinodeEventListener: MessageEventListener? = nil
+    private var messageInteractorQueue = DispatchQueue(label: "co.midnight.messageinteractor")
+    private var midnightEventListener: MessageEventListener? = nil
     // Last reported recv and read seq ids by the onInfo handler.
     // Upon receipt of an info message, the handler will reload all messages with
     // seq ids between the last seen seq id (for recv and read messages respectively)
@@ -75,14 +75,14 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
         guard let topicName = topicName else { return false }
         self.topicName = topicName
         self.topicId = BaseDb.getInstance().topicDb?.getId(topic: topicName)
-        let tinode = Cache.getTinode()
-        if self.tinodeEventListener == nil {
-            self.tinodeEventListener = MessageEventListener(
+        let midnight = Cache.getMidnight()
+        if self.midnightEventListener == nil {
+            self.midnightEventListener = MessageEventListener(
                 interactor: self,
-                connected: tinode.isConnected)
+                connected: midnight.isConnected)
         }
-        tinode.addListener(self.tinodeEventListener!)
-        self.topic = tinode.getTopic(topicName: topicName) as? DefaultComTopic
+        midnight.addListener(self.midnightEventListener!)
+        self.topic = midnight.getTopic(topicName: topicName) as? DefaultComTopic
         self.pagesToLoad = 1
 
         if let pub = self.topic?.pub {
@@ -98,9 +98,9 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
         if self.topic?.listener === self {
             self.topic?.listener = nil
         }
-        let tinode = Cache.getTinode()
-        if let listener = self.tinodeEventListener {
-            tinode.removeListener(listener)
+        let midnight = Cache.getMidnight()
+        if let listener = self.midnightEventListener {
+            midnight.removeListener(listener)
         }
     }
     func leaveTopic() {
@@ -113,11 +113,11 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
             self.presenter?.applyTopicPermissions(withError: nil)
             return true
         }
-        let tinode = Cache.getTinode()
-        guard tinode.isConnectionAuthenticated else {
+        let midnight = Cache.getMidnight()
+        guard midnight.isConnectionAuthenticated else {
             // If connection is not ready, wait for completion.
             // MessageInteractor.attachToTopic() will be called again from the onLogin callback.
-            tinode.reconnectNow(interactively: interactively, reset: false)
+            midnight.reconnectNow(interactively: interactively, reset: false)
             return false
         }
         var builder = topic.metaGetBuilder()
@@ -150,9 +150,9 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
                     return nil
                 },
                 onFailure: { [weak self] err in
-                    let tinode = Cache.getTinode()
+                    let midnight = Cache.getMidnight()
                     let errorMsg = String(format: NSLocalizedString("Failed to subscribe to topic: %@", comment: "Error message"), err.localizedDescription)
-                    if tinode.isConnected {
+                    if midnight.isConnected {
                         DispatchQueue.main.async {
                             UiUtils.showToast(message: errorMsg)
                         }
@@ -160,8 +160,8 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
                         Cache.log.error("MessageInteractor: %@", errorMsg)
                     }
                     switch err {
-                    case TinodeError.notConnected(_):
-                        tinode.reconnectNow(interactively: false, reset: false)
+                    case MidnightError.notConnected(_):
+                        midnight.reconnectNow(interactively: false, reset: false)
                     default:
                         self?.presenter?.applyTopicPermissions(withError: err)
                     }
@@ -183,11 +183,11 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
             },
             onFailure: { err in
                 Cache.log.error("sendMessage error: %@", err.localizedDescription)
-                if let e = err as? TinodeError {
+                if let e = err as? MidnightError {
                     switch e {
                     case .notConnected(_):
                         DispatchQueue.main.async { UiUtils.showToast(message: NSLocalizedString("You are offline.", comment: "Toast notification")) }
-                        Cache.getTinode().reconnectNow(interactively: false, reset: false)
+                        Cache.getMidnight().reconnectNow(interactively: false, reset: false)
                     default:
                         DispatchQueue.main.async { UiUtils.showToast(message: NSLocalizedString("Message not sent.", comment: "Toast notification")) }
                     }
@@ -331,7 +331,7 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
                                                 fname: filename,
                                                 refurl: refurl,
                                                 size: data.count) else { return }
-        if let msgId = topic.store?.msgDraft(topic: topic, data: content, head: Tinode.draftyHeaders(for: content)) {
+        if let msgId = topic.store?.msgDraft(topic: topic, data: content, head: Midnight.draftyHeaders(for: content)) {
             let helper = Cache.getLargeFileHelper()
             helper.startUpload(
                 filename: filename, mimetype: mimeType, d: data,
@@ -374,7 +374,7 @@ class MessageInteractor: DefaultComTopic.Listener, MessageBusinessLogic, Message
     }
     override func onData(data: MsgServerData?) {
         self.loadMessages()
-        if let from = data?.from, let seq = data?.seq, !Cache.getTinode().isMe(uid: from) {
+        if let from = data?.from, let seq = data?.seq, !Cache.getMidnight().isMe(uid: from) {
             sendReadNotification(explicitSeq: seq, when: .now() + .seconds(1))
         }
     }

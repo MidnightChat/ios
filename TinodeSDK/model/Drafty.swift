@@ -2,7 +2,7 @@
 //  Drafty.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -824,13 +824,13 @@ open class Drafty: Codable, CustomStringConvertible, Equatable {
 
     /// Serialize Drafty object for storage in database.
     public func serialize() -> String? {
-        return isPlain ? txt : Tinode.serializeObject(self)
+        return isPlain ? txt : Midnight.serializeObject(self)
     }
 
     /// Deserialize Drafty object from database storage.
     public static func deserialize(from data: String?) -> Drafty? {
         guard let data = data else { return nil }
-        if let drafty: Drafty = Tinode.deserializeObject(from: data) {
+        if let drafty: Drafty = Midnight.deserializeObject(from: data) {
             return drafty
         }
         // Don't use init(content: data): there is no need to parse content again.

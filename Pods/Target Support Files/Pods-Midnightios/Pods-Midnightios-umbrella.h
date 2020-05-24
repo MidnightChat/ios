@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_TinodeSDKVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_TinodeSDKVersionString[];
+FOUNDATION_EXPORT double Pods_MidnightiosVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MidnightiosVersionString[];
 

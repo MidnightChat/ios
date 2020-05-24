@@ -1,13 +1,13 @@
 //
 //  ContactsManager.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
-import TinodeSDK
-import TinodiosDB
+import MidnightSDK
+import MidnightiosDB
 
 public class ContactHolder {
     var displayName: String? = nil
@@ -27,7 +27,7 @@ public class ContactHolder {
 class ContactsManager {
     public static var `default` = ContactsManager()
 
-    private let queue = DispatchQueue(label: "co.tinode.contacts")
+    private let queue = DispatchQueue(label: "co.midnight.contacts")
     private let userDb: UserDb!
     init() {
         self.userDb = BaseDb.getInstance().userDb!
@@ -86,7 +86,7 @@ class ContactsManager {
         if let uids = uids {
             users = userDb.read(uids: uids)
         } else {
-            guard let uid = Cache.getTinode().myUid else { return nil }
+            guard let uid = Cache.getMidnight().myUid else { return nil }
             users = userDb.readAll(for: uid)
         }
         // Turn users into contacts.

@@ -1,16 +1,16 @@
 //
 //  AddByIDViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 class AddByIDViewController: UIViewController {
 
-    var tinode: Tinode!
+    var midnight: Midnight!
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var okayButton: UIButton!
 
@@ -19,7 +19,7 @@ class AddByIDViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        self.tinode = Cache.getTinode()
+        self.midnight = Cache.getMidnight()
         UiUtils.dismissKeyboardForTaps(onView: self.view)
     }
 
@@ -53,7 +53,7 @@ class AddByIDViewController: UIViewController {
         // The description is discarded and re-requested as a part of the subsequent {sub} call.
         // Either get rid of the {get} call or save the returned description.
         let getMeta = MsgGetMeta(desc: MetaGetDesc(), sub: nil, data: nil, del: nil, tags: false, cred: false)
-        tinode.getMeta(topic: id, query: getMeta).then(
+        midnight.getMeta(topic: id, query: getMeta).then(
             onSuccess: { [weak self] msg in
                 // Valid topic id.
                 if let desc = msg?.meta?.desc as? Description<VCard, PrivateType> {
@@ -63,8 +63,8 @@ class AddByIDViewController: UIViewController {
                 return nil
             },
             onFailure: { err in
-                if let e = err as? TinodeError {
-                    if case TinodeError.serverResponseError(let code, let text, _) = e {
+                if let e = err as? MidnightError {
+                    if case MidnightError.serverResponseError(let code, let text, _) = e {
                         DispatchQueue.main.async {
                             UiUtils.showToast(message: String(format: NSLocalizedString("Invalid group ID: %d (%@)", comment: "Error message"), code, text))
                         }

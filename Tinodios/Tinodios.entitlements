@@ -6,11 +6,11 @@
 	<string>production</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:*.tinode.co</string>
+		<string>applinks:*.midnight.co</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.co.tinode.tinodios.db</string>
+		<string>group.co.tinode.midnightios.db</string>
 	</array>
 </dict>
 </plist>

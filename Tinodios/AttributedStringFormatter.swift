@@ -1,14 +1,14 @@
 //
 //  AttribFormatter.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 //  Converts Drafty instance into attributed text suitable for display in UITextView
 
 // For MIME -> UTI conversion
 import MobileCoreServices
-import TinodeSDK
+import MidnightSDK
 import UIKit
 
 // iOS's support for styled strings is much weaker than Android's and web. Some styles cannot be nested. They have to be constructed and applied all at once at the leaf level.
@@ -94,9 +94,9 @@ class AttributedStringFormatter: DraftyFormatter {
             }
         case "pub":
             // Custom scheme usr to post back to the server:
-            // tinode:default?name=value
+            // midnight:default?name=value
             baseUrl = URLComponents()
-            baseUrl.scheme = "tinode"
+            baseUrl.scheme = "midnight"
             baseUrl.host = ""
             baseUrl.path = "/post"
             baseUrl.queryItems = []
@@ -346,19 +346,19 @@ class AttributedStringFormatter: DraftyFormatter {
              uti = kUTTypeData
              */
             // Using basic kUTTypeData to prevent iOS from displaying distorted previews.
-            let tinode = Cache.getTinode()
+            let midnight = Cache.getMidnight()
             let baseFont = attributes[.font] as! UIFont
             // The attachment is valid if it contains either data or a link to download the data.
             let isValid = bits != nil || ref != nil
             if isValid {
-                let data = bits ?? Data(tinode.hostURL(useWebsocketProtocol: false)!.appendingPathComponent(ref!).absoluteString.utf8)
+                let data = bits ?? Data(midnight.hostURL(useWebsocketProtocol: false)!.appendingPathComponent(ref!).absoluteString.utf8)
                 let wrapper = NSTextAttachment(data: data, ofType: kUTTypeData as String)
                 wrapper.bounds = CGRect(origin: CGPoint(x: 0, y: baseFont.capHeight - Constants.kAttachmentIconSize.height), size: Constants.kAttachmentIconSize)
                 attributed.append(NSAttributedString(attachment: wrapper))
             }
 
             // Append document's file name.
-            let originalFileName = attachment.name ?? "tinode_file_attachment"
+            let originalFileName = attachment.name ?? "midnight_file_attachment"
             var fname = originalFileName
             // Heuristic for fitting file name in one line.
             let maxLen = Int(size.width) / 11
@@ -400,7 +400,7 @@ class AttributedStringFormatter: DraftyFormatter {
                 second.addAttributes([NSAttributedString.Key.paragraphStyle : paragraph, NSAttributedString.Key.foregroundColor : Constants.kLinkColor,
                     ], range: NSRange(location: 0, length: second.length))
 
-                var baseUrl = URLComponents(string: "tinode://" + tinode.hostName)!
+                var baseUrl = URLComponents(string: "midnight://" + midnight.hostName)!
                 baseUrl.path = ref != nil ? "/large-attachment" : "/small-attachment"
                 baseUrl.queryItems = [URLQueryItem(name: "filename", value: originalFileName)]
 

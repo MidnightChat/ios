@@ -2,7 +2,7 @@
 //  Connection.swift
 //  ios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import Foundation
@@ -52,8 +52,8 @@ public class Connection {
     private var endpointComponenets: URLComponents
     private var apiKey: String
     private var useTLS = false
-    private var connectQueue = DispatchQueue(label: "co.tinode.connection")
-    private var netEventQueue = DispatchQueue(label: "co.tinode.network")
+    private var connectQueue = DispatchQueue(label: "co.midnight.connection")
+    private var netEventQueue = DispatchQueue(label: "co.midnight.network")
     private var autoreconnect: Bool = false
     private var reconnecting: Bool = false
     private var backoffSteps = ExpBackoffSteps()
@@ -116,7 +116,7 @@ public class Connection {
 
     private func createUrlRequest() throws -> URLRequest {
         var request = URLRequest(url: endpointComponenets.url!)
-        request.addValue(apiKey, forHTTPHeaderField: "X-Tinode-APIKey")
+        request.addValue(apiKey, forHTTPHeaderField: "X-Midnight-APIKey")
         return request
     }
 

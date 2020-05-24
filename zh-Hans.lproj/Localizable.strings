@@ -57,10 +57,10 @@
 "Change permissions" = "变更权限";
 
 /* Invitation subject */
-"Check out Tinode Messenger" = "查看Tinode即时通讯";
+"Check out Midnight Messenger" = "查看Midnight即时通讯";
 
 /* Invitation body */
-"Check out Tinode Messenger: https://tinode.co/" = "查看Tinode即时通讯：https://tinode.co/";
+"Check out Midnight Messenger: https://midnight.co/" = "查看Midnight即时通讯：https://midnight.co/";
 
 /* Alert title */
 "Clear all messages?" = "清除所有消息？";

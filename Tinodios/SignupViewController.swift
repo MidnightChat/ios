@@ -1,12 +1,12 @@
 //
 //  SignupViewController.swift
-//  Tinodios
+//  Midnightios
 //
-//  Copyright © 2019 Tinode. All rights reserved.
+//  Copyright © 2019 Midnight. All rights reserved.
 //
 
 import UIKit
-import TinodeSDK
+import MidnightSDK
 
 class SignupViewController: UITableViewController {
 
@@ -80,7 +80,7 @@ class SignupViewController: UITableViewController {
         }
 
         signUpButton.isUserInteractionEnabled = false
-        let tinode = Cache.getTinode()
+        let midnight = Cache.getMidnight()
 
         let avatar = uploadedAvatar ? avatarImageView?.image?.resize(width: UiUtils.kAvatarSize, height: UiUtils.kAvatarSize, clip: true) : nil
         let vcard = VCard(fn: name, avatar: avatar)
@@ -91,9 +91,9 @@ class SignupViewController: UITableViewController {
         creds.append(cred)
         UiUtils.toggleProgressOverlay(in: self, visible: true, title: NSLocalizedString("Registering...", comment: "Progress overlay"))
         do {
-            try tinode.connectDefault()?
+            try midnight.connectDefault()?
                 .thenApply { pkt in
-                    return tinode.createAccountBasic(
+                    return midnight.createAccountBasic(
                         uname: login, pwd: pwd, login: true,
                         tags: nil, desc: desc, creds: creds)
                 }.thenApply { [weak self] msg in
@@ -103,8 +103,8 @@ class SignupViewController: UITableViewController {
                                                          verifying: ctrl.getStringArray(for: "cred")?.first)
                         }
                     } else {
-                        if let token = tinode.authToken {
-                            tinode.setAutoLoginWithToken(token: token)
+                        if let token = midnight.authToken {
+                            midnight.setAutoLoginWithToken(token: token)
                         }
                         UiUtils.routeToChatListVC()
                     }
@@ -114,7 +114,7 @@ class SignupViewController: UITableViewController {
                     DispatchQueue.main.async {
                         UiUtils.showToast(message: String(format: NSLocalizedString("Failed to create account: %@", comment: "Error message"), err.localizedDescription))
                     }
-                    tinode.disconnect()
+                    midnight.disconnect()
                     return nil
                 }.thenFinally { [weak self] in
                     guard let signupVC = self else { return }
@@ -124,7 +124,7 @@ class SignupViewController: UITableViewController {
                     }
                 }
         } catch {
-            tinode.disconnect()
+            midnight.disconnect()
             DispatchQueue.main.async {
                 UiUtils.showToast(message: String(format: NSLocalizedString("Failed to create account: %@", comment: "Error message"), error.localizedDescription))
                 self.signUpButton.isUserInteractionEnabled = true
